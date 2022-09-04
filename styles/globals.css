@@ -4,6 +4,8 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+
 }
 
 a {
@@ -13,4 +15,19 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+
+
+:root {
+  --text-font : 'DM Sans', sans-serif;
+  --title-font : 'EB Garamond', serif;
+
+  --fontSize1 : 20px;
+  --fontSize2 : 30px;
+  --fontSize3 : 40px;
+  --fontSize4 : 60px;
+
+  --maxWidth1 : 2048px; 
+  
 }

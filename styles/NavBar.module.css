@@ -1,0 +1,12 @@
+.global_container {
+	display: flex;
+	justify-content: space-between ;
+	margin: 20px 30px;
+	position: relative;
+	z-index: 6;
+}
+
+.buttons_navigation_container {
+	display: flex;
+	
+}
