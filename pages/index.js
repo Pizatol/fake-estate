@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import css from '../styles/Home.module.css'
 import react, {useState} from 'react'
+import FirebaseAuthService from '../Firebase/FirebaseAuthService'
 
 import NavBar from '../Components/NavBar'
 import LoginForm from '../Components/LoginForm'
