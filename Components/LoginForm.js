@@ -1,7 +1,11 @@
+import { sendPasswordResetEmail } from "firebase/auth";
 import React, { useState, useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
+import Image from "next/image";
 import css from "../styles/LoginForm.module.css";
+
+import personIcon from "../Assets/icons/person_icon.svg";
 
 export default function LoginForm() {
     const { user, setUser } = useContext(LoginContext);
@@ -29,19 +33,44 @@ export default function LoginForm() {
     };
     // logout
     function handleLogout() {
-        FirebaseAuthService.logoutUser();        
+        FirebaseAuthService.logoutUser();
         toggleForm();
     }
 
+    const resetPassword = async () => {
+        if (!username) {
+            alert("Missing email !");
+            return;
+        }
+        try {
+            await FirebaseAuthService.sendPasswordResetEmail(username);
+            alert("sent the password reset email");
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
     return (
-        <>
+        <div className={css.global_containerOn}>
             {formOn ? (
-                <div className={css.global_containerOn}>
+                <div >
                     <div onClick={toggleForm} className={css.overlay}></div>
+
                     <div className={css.form_card}>
-                        <form onSubmit={handleSubmitForm}>
+                        <div className={css.icon_member_login_form_container}>
+                            <Image
+                                src={personIcon}
+                                width={50}
+                                height={50}
+                                alt="icon member"
+                            />
+                        </div>
+                        <h2>MEMBER LOGIN</h2>
+
+                        <form onSubmit={handleSubmitForm}
+                        className={css.form_container}
+                        >
                             <label>
-                                Username (email) :
                                 <input
                                     type="email"
                                     value={username}
@@ -49,14 +78,15 @@ export default function LoginForm() {
                                         setUsername(e.target.value)
                                     }
                                     required
+                                    placeholder="Email ID"
                                 />
                             </label>
                             <label>
-                                Password :
                                 <input
                                     type="password"
                                     required
                                     value={password}
+                                    placeholder="Password"
                                     onChange={(e) =>
                                         setPassword(e.target.value)
                                     }
@@ -64,15 +94,14 @@ export default function LoginForm() {
                             </label>
                             <div>
                                 <button>Login</button>
-                                <button type="button" onClick={handleLogout}>
-                                    Logout
-                                </button>
+                                <button type="button" onClick={resetPassword}>
+                                    Reset
+                                </button>{" "}
                             </div>
                         </form>
-                       {user ? 'you are LOGIN' : "you are LOGOUT"}
                     </div>
                 </div>
             ) : null}
-        </>
+        </div>
     );
 }

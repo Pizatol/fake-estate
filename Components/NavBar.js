@@ -23,7 +23,7 @@ export default function NavBar({ existingUser }) {
                 <div>BOUTON1</div>
                 <div>BOUTON1</div>
             </div>
-            {user ? "login" : "logout" }
+            
 
             {user ? (
                 <button onClick={handleLogout}>Logout</button>
