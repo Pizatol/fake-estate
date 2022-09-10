@@ -53,25 +53,27 @@ export default function LoginForm() {
     return (
         <div className={css.global_containerOn}>
             {formOn ? (
-                <div >
+                <div>
                     <div onClick={toggleForm} className={css.overlay}></div>
 
-                    <div className={css.form_card}>
-                        <div className={css.icon_member_login_form_container}>
+                    <div className={css.login_form_card}>
+                        <div className={css.login_form_icon_member_container}>
                             <Image
                                 src={personIcon}
-                                width={50}
-                                height={50}
+                                width={75}
+                                height={75}
                                 alt="icon member"
                             />
                         </div>
-                        <h2>MEMBER LOGIN</h2>
+                        <h2 className={css.login_form_title}>MEMBER LOGIN</h2>
 
-                        <form onSubmit={handleSubmitForm}
-                        className={css.form_container}
+                        <form
+                            onSubmit={handleSubmitForm}
+                            className={css.login_form_form_container}
                         >
                             <label>
                                 <input
+                                    className={css.form_input}
                                     type="email"
                                     value={username}
                                     onChange={(e) =>
@@ -83,6 +85,7 @@ export default function LoginForm() {
                             </label>
                             <label>
                                 <input
+                                 className={css.form_input}
                                     type="password"
                                     required
                                     value={password}
@@ -93,10 +96,18 @@ export default function LoginForm() {
                                 />
                             </label>
                             <div>
-                                <button>Login</button>
-                                <button type="button" onClick={resetPassword}>
-                                    Reset
+                                <button 
+                                className={css.login_form_login_button}
+                                >LOGIN</button>
+                            </div>
+                            <div>
+                            <p className={css.login_form_reset_text} >Forget Password ? 
+                                <button type="button"
+                                className={css.login_form_reset_button}
+                                 onClick={resetPassword}>
+                                   Click to reset
                                 </button>{" "}
+                            </p>
                             </div>
                         </form>
                     </div>

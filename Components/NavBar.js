@@ -2,6 +2,11 @@ import React, { useState, useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
 import css from "../styles/NavBar.module.css";
+import Image from "next/image";
+
+import logoFakeEstate from '../Assets/logo/logoFakeEstate.png'
+import loginLogo from '../Assets/icons/login_icon.svg'
+import logoutLogo from '../Assets/icons/logout_icon.svg'
 
 export default function NavBar({ existingUser }) {
     const { formOn, setFormOn } = useContext(LoginContext);
@@ -26,9 +31,25 @@ export default function NavBar({ existingUser }) {
             
 
             {user ? (
-                <button onClick={handleLogout}>Logout</button>
+                <button onClick={handleLogout}>
+                <Image
+                    src={logoutLogo}
+                    width={20}
+                    height={20}
+                    alt="Log Out button"
+                />
+                </button>
             ) : (
-                <button onClick={toggleForm}>Login</button>
+                <button onClick={toggleForm}>
+                <Image
+                    src={loginLogo}
+                    width={20}
+                    height={20}
+                    alt="Log In button"
+                />
+                    
+                   
+                </button>
             )}
         </div>
     );
