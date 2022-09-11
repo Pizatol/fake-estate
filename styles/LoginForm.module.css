@@ -1,6 +1,6 @@
 .global_containerOn .overlay {
     width: 100%;
-    height: 100vh;
+    height: 200vh;
     position: absolute;
     top: 0;
 }
@@ -8,6 +8,7 @@
 .overlay {
     background-color: #2f2f2f;
     opacity: 70%;
+    z-index: 4;
 }
 .login_form_card {
     position: absolute;

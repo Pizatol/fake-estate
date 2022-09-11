@@ -1,16 +1,17 @@
 import Head from "next/head";
 import Image from "next/image";
 import css from "../styles/Home.module.css";
-import react, { useState } from "react";
+import react, { useState, useContext } from "react";
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
-
+import { LoginContext } from "../context/LoginContext";
 
 import NavBar from "../Components/NavBar";
 import LoginForm from "../Components/LoginForm";
 import Carousel from "../Components/Carousel";
+import CreateEditForm from "../Components/CreateEditForm";
 
 export default function Home() {
-    const [user, setUser] = useState(null);
+    const { user, setUser } = useContext(LoginContext);
 
     return (
         <div className={css.container}>
@@ -26,15 +27,13 @@ export default function Home() {
             <div className={css.global_container}>
                 <NavBar existingUser={user} />
                 <LoginForm />
-                <Carousel/>
+
+                {/* {user  ? "" : <Carousel />} */}
 
                 <section className={css.test_section}>
                     <h1 className={css.title}>Ceci est un titre</h1>
-                    <p className={css.para1}>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Id accusantium molestias sint cupiditate nulla
-                        laudantium.
-                    </p>
+                {/* {user ? ( <CreateEditForm />) : ""} */}
+                <CreateEditForm />
                 </section>
             </div>
         </div>

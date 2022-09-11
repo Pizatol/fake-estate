@@ -29,5 +29,12 @@ a {
   --fontSize4 : 60px;
 
   --maxWidth1 : 1800px; 
+
+  --darkColor1 : #2f2f2f;
+  --darkColor2 : #4c4c4c ;
+  --greyColor1 : #a19da0;
+  --greyColor2 : #c8c8c8 ;
+  --whiteColor1 : #F1F1F1; 
   
+  --blueColor1 : rgb(106, 106, 233) ; 
 }

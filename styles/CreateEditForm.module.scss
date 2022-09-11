@@ -1,0 +1,62 @@
+.form_container {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 1500px;
+    padding: 100px;
+    border: 1px solid blue;
+}
+
+.form_name,
+.form_adress {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 500px;
+
+    font-family: var(--text-font);
+    font-size: var(--fontSize1);
+    color: var(--darkColor1);
+    input {
+        width: 700px;
+        height: 50px;
+        margin-bottom: 15px;
+        margin-left: 10px;
+        border: 1px solid var(--darkColor1);
+        border-radius: 4px;
+        font-family: var(--text-font);
+        font-size: var(--fontSize1);
+        color: var(--darkColor1);
+    }
+    input:focus {
+        border: 2px solid blue;
+        outline: none;
+    }
+}
+
+.form_surface,
+.form_floor,
+.form_price {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 200px;
+    font-family: var(--text-font);
+    font-size: var(--fontSize1);
+    color: var(--darkColor1);
+    input {
+        max-width: 150px;
+        height: 50px;
+        margin-bottom: 15px;
+        margin-left: 10px;
+        border: 1px solid var(--darkColor1);
+        border-radius: 4px;
+        font-family: var(--text-font);
+        font-size: var(--fontSize1);
+        color: var(--darkColor1);
+    }
+    input:focus {
+        border: 2px solid blue;
+        outline: none;
+    }
+}

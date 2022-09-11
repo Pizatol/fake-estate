@@ -17,24 +17,41 @@ import img5 from "../Assets/images_Carousel/5.jpg";
 import img6 from "../Assets/images_Carousel/6.jpg";
 
 export default function Carousel() {
+    const imgArr = [img1, img2, img3, img4, img5, img6];
+
     return (
         <div className={css.carousel_container_global}>
             <Swiper
                 modules={[Autoplay, Pagination, Navigation]}
                 navigation={false}
-                pagination={{
-                    type: "progressbar",
-                }}
+                // pagination={{
+                //     type: "progressbar",
+                // }}
                 autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
+                    delay: 5000,
+                    disableOnInteraction: true,
                 }}
                 spaceBetween={0}
-					 centeredSlides={true}
+                centeredSlides={true}
                 slidesPerView={1}
                 loop={true}
             >
-                <SwiperSlide className="">
+                {imgArr.map((img) => (
+                    <SwiperSlide
+                        className={css.carousel_image_container}
+                        key={img}
+                    >
+                        <Image
+                            src={img}
+                            width={1932}
+                            heigh={1288}
+                            layout="responsive"
+                            alt="picture carousel"
+                        />
+                    </SwiperSlide>
+                ))}
+
+                {/* <SwiperSlide className={css.carousel_image_container}>
                     <Image
                         src={img1}
                         width={1932}
@@ -43,7 +60,7 @@ export default function Carousel() {
                         alt="picture carousel"
                     />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className={css.carousel_image_container}>
                     <Image
                         src={img2}
                         width={1932}
@@ -52,7 +69,7 @@ export default function Carousel() {
                         alt="picture carousel"
                     />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className={css.carousel_image_container}>
                     <Image
                         src={img3}
                         width={1932}
@@ -61,7 +78,7 @@ export default function Carousel() {
                         alt="picture carousel"
                     />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className={css.carousel_image_container}>
                     <Image
                         src={img4}
                         width={1932}
@@ -70,7 +87,7 @@ export default function Carousel() {
                         alt="picture carousel"
                     />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className={css.carousel_image_container}>
                     <Image
                         src={img5}
                         width={1932}
@@ -79,7 +96,7 @@ export default function Carousel() {
                         alt="picture carousel"
                     />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className={css.carousel_image_container}>
                     <Image
                         src={img6}
                         width={1932}
@@ -87,7 +104,7 @@ export default function Carousel() {
                         layout="responsive"
                         alt="picture carousel"
                     />
-                </SwiperSlide>
+                </SwiperSlide> */}
             </Swiper>
         </div>
     );
