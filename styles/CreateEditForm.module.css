@@ -2,22 +2,24 @@
   display: flex;
   flex-direction: column;
   max-width: 1500px;
-  padding: 100px;
-  border: 1px solid blue;
+  border: 1px solid var(--blueColor1);
 }
 
 .form_name,
-.form_adress {
+.form_adress,
+.form_heating {
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
+  margin: 10px 0 15px 10px;
   width: 500px;
   font-family: var(--text-font);
-  font-size: var(--fontSize1);
+  font-size: var(--fontSize2);
   color: var(--darkColor1);
 }
 .form_name input,
-.form_adress input {
+.form_adress input,
+.form_heating input {
   width: 700px;
   height: 50px;
   margin-bottom: 15px;
@@ -29,8 +31,9 @@
   color: var(--darkColor1);
 }
 .form_name input:focus,
-.form_adress input:focus {
-  border: 2px solid blue;
+.form_adress input:focus,
+.form_heating input:focus {
+  border: 2px solid var(--blueColor1);
   outline: none;
 }
 
@@ -38,11 +41,11 @@
 .form_floor,
 .form_price {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
   width: 200px;
   font-family: var(--text-font);
-  font-size: var(--fontSize1);
+  font-size: var(--fontSize2);
   color: var(--darkColor1);
 }
 .form_surface input,
@@ -50,8 +53,8 @@
 .form_price input {
   max-width: 150px;
   height: 50px;
-  margin-bottom: 15px;
-  margin-left: 10px;
+  margin-top: 10px;
+  margin: 10px 0 15px 10px;
   border: 1px solid var(--darkColor1);
   border-radius: 4px;
   font-family: var(--text-font);
@@ -61,6 +64,99 @@
 .form_surface input:focus,
 .form_floor input:focus,
 .form_price input:focus {
-  border: 2px solid blue;
+  border: 2px solid var(--blueColor1);
   outline: none;
+}
+
+.form_elevator,
+.form_sellLocate,
+.form_publishDate {
+  width: 200px;
+  margin: 10px 0 15px 10px;
+  font-family: var(--text-font);
+  font-size: var(--fontSize2);
+  color: var(--darkColor1);
+}
+.form_elevator select,
+.form_elevator input,
+.form_sellLocate select,
+.form_sellLocate input,
+.form_publishDate select,
+.form_publishDate input {
+  width: 70px;
+  height: 40px;
+  font-family: var(--text-font);
+  font-size: var(--fontSize1);
+  margin-bottom: 15px;
+  margin-left: 10px;
+  border-radius: 3px;
+}
+.form_elevator select:focus,
+.form_sellLocate select:focus,
+.form_publishDate select:focus {
+  border: 2px solid var(--blueColor1);
+  outline: none;
+}
+.form_elevator input,
+.form_sellLocate input,
+.form_publishDate input {
+  width: 150px;
+}
+.form_elevator input:focus,
+.form_sellLocate input:focus,
+.form_publishDate input:focus {
+  border: 2px solid var(--blueColor1);
+  outline: none;
+}
+
+.form_detailledText,
+.form_summaryText {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 15px 10px;
+  font-family: var(--text-font);
+  font-size: var(--fontSize2);
+  color: var(--darkColor1);
+}
+.form_detailledText textarea,
+.form_summaryText textarea {
+  font-family: var(--text-font);
+  font-size: var(--fontSize1);
+  color: var(--darkColor1);
+  width: 900px;
+  height: 150px;
+  padding-top: 10px;
+  padding-left: 10px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+.form_detailledText textarea:focus,
+.form_summaryText textarea:focus {
+  border: 2px solid var(--blueColor1);
+  outline: none;
+}
+
+.form_submit_button,
+.form_cancel_button {
+  font-family: var(--text-font);
+  font-size: var(--fontSize1);
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  color: var(--whiteColor1);
+  background-color: var(--darkColor2);
+  transition: all 0.3s ease;
+  margin-left: 15px;
+}
+
+.form_submit_button:hover {
+  background-color: var(--greyColor1);
+  color: var(--blueColor1);
+}
+
+.form_cancel_button:hover {
+  background-color: var(--greyColor1);
+  color: var(--redColor1);
 }/*# sourceMappingURL=CreateEditForm.module.css.map */

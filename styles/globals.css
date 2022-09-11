@@ -36,5 +36,8 @@ a {
   --greyColor2 : #c8c8c8 ;
   --whiteColor1 : #F1F1F1; 
   
-  --blueColor1 : rgb(106, 106, 233) ; 
+  /* --blueColor1 : rgb(106, 106, 233) ;
+   */
+   --blueColor1  : #4285f4;
+  --redColor1 : #ff5d5d;  
 }

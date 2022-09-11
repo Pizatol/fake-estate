@@ -3,6 +3,7 @@ import Image from "next/image";
 import css from "../styles/Home.module.css";
 import react, { useState, useContext } from "react";
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
+import FirebaseFirestoreService from '../Firebase/FirebaseFirestoreService'
 import { LoginContext } from "../context/LoginContext";
 
 import NavBar from "../Components/NavBar";
@@ -12,6 +13,17 @@ import CreateEditForm from "../Components/CreateEditForm";
 
 export default function Home() {
     const { user, setUser } = useContext(LoginContext);
+
+    FirebaseAuthService.subscribeToAuthChanges(setUser)
+
+    const handleAddProduct = async (newProduct) => {
+        try {
+            const response = await FirebaseFirestoreService.createDocument('Products',  newProduct)
+            alert(`successfully added new product with ID : ${response.id}  ! `)
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
     return (
         <div className={css.container}>
@@ -33,7 +45,7 @@ export default function Home() {
                 <section className={css.test_section}>
                     <h1 className={css.title}>Ceci est un titre</h1>
                 {/* {user ? ( <CreateEditForm />) : ""} */}
-                <CreateEditForm />
+                <CreateEditForm handleAddProduct={handleAddProduct} />
                 </section>
             </div>
         </div>

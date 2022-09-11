@@ -17,6 +17,8 @@ export default function NavBar({ existingUser }) {
     };
     function handleLogout() {
         FirebaseAuthService.logoutUser();
+
+        alert('You are now log OUT')
         
     }
 

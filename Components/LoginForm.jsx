@@ -27,6 +27,7 @@ export default function LoginForm() {
             setPassword("");
             toggleForm();
             FirebaseAuthService.subscribeToAuthChanges(setUser);
+            alert(`Welcome ${username}`)
         } catch (error) {
             alert(error.message);
         }

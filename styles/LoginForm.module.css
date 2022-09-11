@@ -70,7 +70,7 @@
 
 }
 .login_form_login_button:hover {
-	color: rgb(106, 106, 233);
+	color: var(--blueColor1);
 } 
 .login_form_reset_text {
     font-family: var(--text-font);
@@ -87,5 +87,5 @@
     transition: all 0.3s ease;
 }
 .login_form_reset_button:hover {
-    color: rgb(106, 106, 233);
+    color: var(--blueColor1);
 }
