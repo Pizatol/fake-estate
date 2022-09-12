@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
 import Image from "next/image";
-import css from "../styles/LoginForm.module.css";
+import css from "../styles/LoginForm.module.scss";
 
 import personIcon from "../Assets/icons/person_icon.svg";
 

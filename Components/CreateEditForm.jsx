@@ -51,7 +51,7 @@ export default function CreateEditForm({ handleAddProduct }) {
         setHeating("");
         setTextDetailled("");
         setTextSummary("");
-        setSetRental("");
+        setSellRental("");
         setPublishDate(new Date().toISOString().split("T")[0]);
         window.scrollTo(0, 0);
     };

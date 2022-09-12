@@ -14,13 +14,9 @@ const config = {
     
 };
 
-// version 8
-// const classicFirebaseApp = firebase.initializeApp(config);
-// const auth = classicFirebaseApp.auth();
-// const firestore = classicFirebaseApp.firestore();
-// const storage = classicFirebaseApp.storage();
 
-// version 9
+
+
 const firebaseApp = initializeApp(config);
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);

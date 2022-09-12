@@ -8,10 +8,10 @@ import {
 
 const storage = firebase.storage;
 
-const uploadFile = (file, fullFilePath, progressCallback) => {
+// UPLOAD
+const uploadFile = async (file, fullFilePath, progressCallback) => {
     const upploadRef = ref(storage, fullFilePath)
     const uploadTask = uploadBytesResumable(upploadRef, file)
-    // const uploadTask = storageRef.child(fullFilePath).put(file);
 
     uploadTask.on(
         "state_changed",
@@ -26,20 +26,21 @@ const uploadFile = (file, fullFilePath, progressCallback) => {
         }
     );
     return uploadTask.then(async () => {
-        // const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
+       
         const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref)
 
         return downloadUrl;
     });
 };
 
+// DELETE
 const deleteFile = (fileDownloadUrl) => {
     const decodedUrl = decodeURIComponent(fileDownloadUrl);
     const startIndex = decodedUrl.indexOf("/o/") + 3;
     const endIndex = decodedUrl.indexOf("?");
     const filePath = decodedUrl.substring(startIndex, endIndex);
 
-    // return storageRef.child(filePath).delete();
+    
     const fileRef = ref(storage, filePath);
 
     return deleteObject(fileRef)

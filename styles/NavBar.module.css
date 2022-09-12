@@ -1,13 +1,12 @@
 .global_container {
-	max-width: var(--maxWidth1) ;
-	display: flex;
-	justify-content: space-between ;
-	margin: 30px auto;
-	position: relative;
-	z-index: 6;
+  max-width: var(--maxWidth1);
+  display: flex;
+  justify-content: space-between;
+  margin: 30px auto;
+  position: relative;
+  z-index: 6;
 }
 
 .buttons_navigation_container {
-	display: flex;
-	
-}
+  display: flex;
+}/*# sourceMappingURL=NavBar.module.css.map */

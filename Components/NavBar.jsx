@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
-import css from "../styles/NavBar.module.css";
+import css from "../styles/NavBar.module.scss";
 import Image from "next/image";
 
 import logoFakeEstate from '../Assets/logo/logoFakeEstate.png'

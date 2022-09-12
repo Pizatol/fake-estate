@@ -1,8 +1,6 @@
-
 .global_container {
   /* max-width: var(--maxWidth1); */
   margin: auto;
- 
 }
 
 .test_section {
@@ -10,15 +8,14 @@
   margin: 150px auto;
   position: relative;
   z-index: 2;
- 
 }
 
 .title {
-  font-family:  var(--title-font);
+  font-family: var(--title-font);
   font-size: var(--fontSize4);
 }
 
-.para1{
+.para1 {
   font-size: var(--fontSize1);
   font-family: var(--text-font);
-}
+}/*# sourceMappingURL=Home.module.css.map */
