@@ -20,13 +20,14 @@ export const fetchProducts = async () => {
 			  };
 		 });
 		 fetchedProducts = [...newProducts];
+		 
 	} catch (error) {
 		 console.error(error.message);
 		 throw error;
 	}
 	return fetchedProducts;
 };
-
+// FETCH PRODUCT
 export const handleFetchProducts = async () => {
 	try {
 		 const fetchedProducts = await fetchProducts();
@@ -36,7 +37,7 @@ export const handleFetchProducts = async () => {
 		 throw error;
 	}
 };
-
+// ADD PRODUCT
 export const handleAddProduct = async (newProduct) => {
 	try {
 		 const response = await FirebaseFirestoreService.createDocument(
@@ -44,7 +45,7 @@ export const handleAddProduct = async (newProduct) => {
 			  newProduct
 		 );
 
-		 handleFetchProducts();
+		//  handleFetchProducts();
 		 alert(
 			  `successfully added new product with ID : ${response.id}  ! `
 		 );
@@ -52,7 +53,7 @@ export const handleAddProduct = async (newProduct) => {
 		 alert(error.message);
 	}
 };
-
+// UPDATE PRODUCT
 export const handleUpdateProduct = async (newProduct, productId) => {
 	try {
 		 await FirebaseFirestoreService.updateDocument(

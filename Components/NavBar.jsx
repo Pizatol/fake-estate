@@ -3,6 +3,7 @@ import { LoginContext } from "../context/LoginContext";
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
 import css from "../styles/NavBar.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 import logoFakeEstate from '../Assets/logo/logoFakeEstate.png'
 import loginLogo from '../Assets/icons/login_icon.svg'
@@ -26,8 +27,14 @@ export default function NavBar({ existingUser }) {
         <div className={css.global_container}>
             <div>LOGO</div>
             <div className={css.buttons_navigation_container}>
-                <div>BOUTON1</div>
-                <div>BOUTON1</div>
+                <Link
+                href="/SellPage"
+                >
+                    <button>Vente</button>
+                </Link>
+               <Link  href="/LocationPage" >
+                <button>Location</button>
+               </Link>
                 <div>BOUTON1</div>
             </div>
             
