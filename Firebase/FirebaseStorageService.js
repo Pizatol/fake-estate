@@ -1,54 +1,53 @@
-import firebase from "./FirebaseConfig";
+import firebase from './FirebaseConfig';
+
 import {
-    ref,
-    uploadBytesResumable,
-    getDownloadURL,
-    deleteObject,
-} from "firebase/storage";
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 
 const storage = firebase.storage;
 
-// UPLOAD
 const uploadFile = async (file, fullFilePath, progressCallback) => {
-    const upploadRef = ref(storage, fullFilePath)
-    const uploadTask = uploadBytesResumable(upploadRef, file)
+  const uploadRef = ref(storage, fullFilePath);
+  const uploadTask = uploadBytesResumable(uploadRef, file);
 
-    uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-            const progress = Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            progressCallback(progress);
-        },
-        (error) => {
-            throw error;
-        }
-    );
-    return uploadTask.then(async () => {
-       
-        const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref)
+  uploadTask.on(
+    'state_changed',
+    (snapshot) => {
+      const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
 
-        return downloadUrl;
-    });
+      progressCallback(progress);
+    },
+    (error) => {
+      throw error;
+    }
+  );
+
+  return uploadTask.then(async () => {
+    const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+
+    return downloadUrl;
+  });
 };
 
-// DELETE
 const deleteFile = (fileDownloadUrl) => {
-    const decodedUrl = decodeURIComponent(fileDownloadUrl);
-    const startIndex = decodedUrl.indexOf("/o/") + 3;
-    const endIndex = decodedUrl.indexOf("?");
-    const filePath = decodedUrl.substring(startIndex, endIndex);
+  const decodedUrl = decodeURIComponent(fileDownloadUrl);
+  const startIndex = decodedUrl.indexOf('/o/') + 3;
+  const endIndex = decodedUrl.indexOf('?');
+  const filePath = decodedUrl.substring(startIndex, endIndex);
 
-    
-    const fileRef = ref(storage, filePath);
+  const fileRef = ref(storage, filePath);
 
-    return deleteObject(fileRef)
+  return deleteObject(fileRef);
 };
 
 const FirebaseStorageService = {
-    uploadFile,
-    deleteFile,
+  uploadFile,
+  deleteFile,
 };
 
 export default FirebaseStorageService;

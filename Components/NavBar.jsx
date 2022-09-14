@@ -25,7 +25,9 @@ export default function NavBar({ existingUser }) {
 
     return (
         <div className={css.global_container}>
-            <div>LOGO</div>
+            <Link href="/">
+               <a >LOGO</a>
+            </Link>
             <div className={css.buttons_navigation_container}>
                 <Link
                 href="/SellPage"

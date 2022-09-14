@@ -12,6 +12,8 @@ import {
 
 import FirebaseFirestoreService from "../Firebase/FirebaseFirestoreService";
 
+import { handleFetchProducts } from "../Logic/Crud";
+
 import NavBar from "../Components/NavBar";
 import LoginForm from "../Components/LoginForm";
 import ProductMiniCard from "../Components/ProductMiniCard";
@@ -24,26 +26,18 @@ export default function SellPage() {
     const collectionRef = collection(db, "Products");
 
     useEffect(() => {
-        const getUsers = async () => {
-            let fetchedProducts = [];
-            const response = await getDocs(collectionRef);
-
-            const newProducts = response.docs.map((productDoc) => {
-                const id = productDoc.id;
-                const data = productDoc.data();
-                data.publishDate = new Date(data.publishDate.seconds * 1000);
-
-                return {
-                    ...data,
-                    id,
-                };
-            });
-            fetchedProducts = [...newProducts];
-
-            setProducts(fetchedProducts);
+        const fetchingProducts = async () => {
+            try {
+                const data = await handleFetchProducts();
+                setProducts(data);
+            } catch (error) {
+                console.error(error.message);
+                throw error;
+            }
         };
-        getUsers();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        fetchingProducts();
+
+       
     }, []);
 
     console.log(products);
@@ -60,6 +54,7 @@ export default function SellPage() {
                       return (
                           <ProductMiniCard
                               key={index}
+
                               name={product.name}
                               adress={product.adress}
                               price={product.price}
@@ -67,6 +62,9 @@ export default function SellPage() {
                               floor={product.floor}
                               elevator={product.elevator}
                               heating={product.heating}
+                              textDetailled = {product.textDetailled}
+                              textSmmary = {product.textSummary}
+                              sellRental = {product.sellRental}
                               publishDate={product.publishDate}
                           />
                       );
@@ -75,3 +73,26 @@ export default function SellPage() {
         </div>
     );
 }
+
+
+// DANS LE USEEFFECT
+
+ // const getUsers = async () => {
+        //     let fetchedProducts = [];
+        //     const response = await getDocs(collectionRef);
+
+        //     const newProducts = response.docs.map((productDoc) => {
+        //         const id = productDoc.id;
+        //         const data = productDoc.data();
+        //         data.publishDate = new Date(data.publishDate.seconds * 1000);
+
+        //         return {
+        //             ...data,
+        //             id,
+        //         };
+        //     });
+        //     fetchedProducts = [...newProducts];
+
+        //     setProducts(fetchedProducts);
+        // };
+        // getUsers();

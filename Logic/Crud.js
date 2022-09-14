@@ -1,8 +1,8 @@
 import firebaseConfig from "../Firebase/FirebaseConfig";
 import FirebaseFirestoreService from "../Firebase/FirebaseFirestoreService";
 
-
-export const fetchProducts = async () => {
+// FETCH PRODUCT
+export const handleFetchProducts = async () => {
 	let fetchedProducts = [];
 	try {
 		 const response = await FirebaseFirestoreService.readDocuments(
@@ -27,16 +27,7 @@ export const fetchProducts = async () => {
 	}
 	return fetchedProducts;
 };
-// FETCH PRODUCT
-export const handleFetchProducts = async () => {
-	try {
-		 const fetchedProducts = await fetchProducts();
-		 setProducts(fetchedProducts);
-	} catch (error) {
-		 console.error(error.message);
-		 throw error;
-	}
-};
+
 // ADD PRODUCT
 export const handleAddProduct = async (newProduct) => {
 	try {
@@ -61,7 +52,7 @@ export const handleUpdateProduct = async (newProduct, productId) => {
 			  productId,
 			  newProduct
 		 );
-		 handleFetchProducts();
+		//  handleFetchProducts();
 
 		 alert(`Successfully updated a product with an ID = ${productId} `);
 	} catch (error) {

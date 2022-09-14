@@ -9,8 +9,7 @@ import firebaseConfig from "../Firebase/FirebaseConfig";
 
 import {
     handleFetchProducts,
-    handleUpdateProduct,
-    fetchProducts,
+    handleUpdateProduct,   
     handleAddProduct,
     handleEditProductClick,
     handleEditProductCancel,
@@ -30,7 +29,7 @@ export default function Home() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetchProducts()
+        handleFetchProducts()
             .then((fetchedProducts) => {
                 setProducts(fetchedProducts);
             })

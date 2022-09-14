@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import css from "../styles/CreateEditForm.module.scss";
+import ImageUploadPreview from "./ImageUploadPreview";
 
 export default function CreateEditForm({ handleAddProduct }) {
    //  const [id, setId] = useState("");
@@ -9,14 +10,15 @@ export default function CreateEditForm({ handleAddProduct }) {
     const [price, setPrice] = useState(0);
     const [surface, setSurface] = useState(0);
     const [floor, setFloor] = useState(0);
-    const [elevator, setElevator] = useState(null);
+    const [elevator, setElevator] = useState("");
     const [heating, setHeating] = useState("");
     const [textDetailled, setTextDetailled] = useState("");
     const [textSummary, setTextSummary] = useState("");
-    const [sellRental, setSellRental] = useState(null);
+    const [sellRental, setSellRental] = useState("");
     const [publishDate, setPublishDate] = useState(
         new Date().toISOString().split("T")[0]
     );
+    const [imageUrl, setImageUrl] = useState('')
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -36,7 +38,15 @@ export default function CreateEditForm({ handleAddProduct }) {
             sellRental,
             publishDate: new Date(publishDate),
             isPublished,
+            imageUrl
         };
+
+
+        if(!imageUrl) {
+            alert('Missing image, please add at least one image')
+            return;
+        }
+
 		  handleAddProduct(newProduct)
        
     };
@@ -53,6 +63,7 @@ export default function CreateEditForm({ handleAddProduct }) {
         setTextSummary("");
         setSellRental("");
         setPublishDate(new Date().toISOString().split("T")[0]);
+        setImageUrl('')
         window.scrollTo(0, 0);
     };
 
@@ -60,6 +71,18 @@ export default function CreateEditForm({ handleAddProduct }) {
         <div className={css.global_container}>
             
             <form onSubmit={handleFormSubmit} className={css.form_container}>
+
+            <div>
+                Product Image
+                <ImageUploadPreview 
+                basePath='products'
+                existingImgUrl = {imageUrl}
+                handleUploadFinish = {(downloadUrl) => setImageUrl(downloadUrl) }
+                handleUploadCancel = {() => setImageUrl('') }
+                ></ImageUploadPreview>
+            </div>
+
+
                 <label className={css.form_name}>
                     Name
                     <input
@@ -132,7 +155,7 @@ export default function CreateEditForm({ handleAddProduct }) {
                         value={elevator}
                         onChange={(e) => setElevator(e.target.value)}
                     >
-                        <option value="" selected></option>
+                        <option value="" defaultValue={""}></option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
                     </select>
@@ -166,7 +189,7 @@ export default function CreateEditForm({ handleAddProduct }) {
                 >
                     Sell or Locate :
                     <select required>
-                        <option value="" selected></option>
+                        <option value="" defaultValue={""}></option>
                         <option value="sell">Sell</option>
                         <option value="location">Location</option>
                     </select>
