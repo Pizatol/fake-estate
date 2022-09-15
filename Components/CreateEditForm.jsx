@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+
 import css from "../styles/CreateEditForm.module.scss";
 import ImageUploadPreview from "./ImageUploadPreview";
 
 export default function CreateEditForm({ handleAddProduct }) {
-   //  const [id, setId] = useState("");
+    //  const [id, setId] = useState("");
 
     const [name, setName] = useState("");
     const [adress, setAdress] = useState("");
@@ -18,7 +19,7 @@ export default function CreateEditForm({ handleAddProduct }) {
     const [publishDate, setPublishDate] = useState(
         new Date().toISOString().split("T")[0]
     );
-    const [imageUrl, setImageUrl] = useState('')
+    const [imageUrl, setImageUrl] = useState([]);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -38,18 +39,22 @@ export default function CreateEditForm({ handleAddProduct }) {
             sellRental,
             publishDate: new Date(publishDate),
             isPublished,
-            imageUrl
+            imageUrl,
         };
 
-
-        if(!imageUrl) {
-            alert('Missing image, please add at least one image')
+        if (!imageUrl) {
+            alert("Missing image, please add at least one image");
             return;
         }
-
-		  handleAddProduct(newProduct)
-       
+       handleAddImages()
+        handleAddProduct(newProduct);
     };
+
+    const handleAddImages = (e) => {
+        setImageUrl(e)
+        console.log(imageUrl)
+    };
+
 
     const resetForm = () => {
         setName("");
@@ -63,25 +68,19 @@ export default function CreateEditForm({ handleAddProduct }) {
         setTextSummary("");
         setSellRental("");
         setPublishDate(new Date().toISOString().split("T")[0]);
-        setImageUrl('')
+        setImageUrl([]);
         window.scrollTo(0, 0);
     };
 
     return (
         <div className={css.global_container}>
-            
             <form onSubmit={handleFormSubmit} className={css.form_container}>
-
-            <div>
-                Product Image
-                <ImageUploadPreview 
-                basePath='products'
-                existingImgUrl = {imageUrl}
-                handleUploadFinish = {(downloadUrl) => setImageUrl(downloadUrl) }
-                handleUploadCancel = {() => setImageUrl('') }
-                ></ImageUploadPreview>
-            </div>
-
+                <div>
+                    Product Image
+                    <ImageUploadPreview
+                        handleAddImages={handleAddImages}
+                    ></ImageUploadPreview>
+                </div>
 
                 <label className={css.form_name}>
                     Name
@@ -182,7 +181,7 @@ export default function CreateEditForm({ handleAddProduct }) {
                 </label>
 
                 <label
-					 onChange={(e) => setSellRental(e.target.value)}
+                    onChange={(e) => setSellRental(e.target.value)}
                     className={css.form_sellLocate}
                     value={sellRental}
                     required

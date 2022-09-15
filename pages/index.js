@@ -4,8 +4,7 @@ import css from "../styles/Home.module.scss";
 import react, { useState, useContext, useEffect } from "react";
 
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
-import FirebaseFirestoreService from "../Firebase/FirebaseFirestoreService";
-import firebaseConfig from "../Firebase/FirebaseConfig";
+
 
 import {
     handleFetchProducts,

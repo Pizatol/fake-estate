@@ -40,7 +40,7 @@ export default function SellPage() {
        
     }, []);
 
-    console.log(products);
+    
 
     return (
         <div>
@@ -66,7 +66,7 @@ export default function SellPage() {
                               textSmmary = {product.textSummary}
                               sellRental = {product.sellRental}
                               publishDate={product.publishDate}
-                              imageUrl = {product.imageUrl}
+                              imageUrl = {product.imageUrl[0]}
                           />
                       );
                   })

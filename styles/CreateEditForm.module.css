@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   max-width: 1500px;
-  border: 1px solid var(--blueColor1);
 }
 
 .form_name,
@@ -20,10 +19,10 @@
 .form_name input,
 .form_adress input,
 .form_heating input {
-  width: 700px;
-  height: 50px;
-  margin-bottom: 15px;
-  margin-left: 10px;
+  width: 200px;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-left: 5px;
   border: 1px solid var(--darkColor1);
   border-radius: 4px;
   font-family: var(--text-font);
@@ -52,9 +51,8 @@
 .form_floor input,
 .form_price input {
   max-width: 150px;
-  height: 50px;
-  margin-top: 10px;
-  margin: 10px 0 15px 10px;
+  height: 30px;
+  margin: 5px 0 5px 10px;
   border: 1px solid var(--darkColor1);
   border-radius: 4px;
   font-family: var(--text-font);
@@ -83,8 +81,8 @@
 .form_sellLocate input,
 .form_publishDate select,
 .form_publishDate input {
-  width: 70px;
-  height: 40px;
+  width: 40px;
+  height: 20px;
   font-family: var(--text-font);
   font-size: var(--fontSize1);
   margin-bottom: 15px;
@@ -123,8 +121,8 @@
   font-family: var(--text-font);
   font-size: var(--fontSize1);
   color: var(--darkColor1);
-  width: 900px;
-  height: 150px;
+  width: 400px;
+  height: 75px;
   padding-top: 10px;
   padding-left: 10px;
   margin-bottom: 15px;
