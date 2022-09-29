@@ -2,9 +2,21 @@ import Head from "next/head";
 import Image from "next/image";
 import css from "../styles/Home.module.scss";
 import react, { useState, useContext, useEffect } from "react";
+import firebase from "../Firebase/FirebaseConfig";
 
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
-
+import { db } from "../Firebase/FirebaseConfig";
+import { Auth } from "firebase/auth";
+import {
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    startAfter,
+    deleteField,
+} from "firebase/firestore";
 
 import {
     handleFetchProducts,
@@ -22,22 +34,16 @@ import Carousel from "../Components/Carousel";
 import CreateEditForm from "../Components/CreateEditForm";
 
 export default function Home() {
+
     const { user, setUser } = useContext(LoginContext);
     FirebaseAuthService.subscribeToAuthChanges(setUser);
+    // const dataCollectionRef = collection(db, "test");
 
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        handleFetchProducts()
-            .then((fetchedProducts) => {
-                setProducts(fetchedProducts);
-            })
-            .catch((error) => {
-                console.error(error.message);
-                throw error;
-            });
-    }, [user]);
+  
 
+   
     return (
         <div className={css.container}>
             <Head>
@@ -58,14 +64,14 @@ export default function Home() {
                 <section className={css.test_section}>
 
 
-                
+                <Carousel/>
 
 
-                    {user ? (
+                    {/* {user ? (
                         <CreateEditForm handleAddProduct={handleAddProduct} />
                     ) : (
                         ""
-                    )}
+                    )} */}
                 </section>
             </div>
         </div>

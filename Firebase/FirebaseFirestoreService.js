@@ -1,4 +1,5 @@
 import firebase from "./FirebaseConfig";
+import { db } from "./FirebaseConfig";
 
 import {
     addDoc,
@@ -15,31 +16,30 @@ import {
     deleteDoc,
 } from "firebase/firestore/lite";
 
-const firestore = firebase.firestore;
 // CREATE
 const createDocument = (collection, document) => {
-    return addDoc(firestoreCollection(firestore, collection), document);
+    return addDoc(firestoreCollection(db), document);
 };
 
 const readDocuments = async (collection) => {
-    const collectionRef = firestoreCollection(firestore, "Products");
+    const collectionRef = firestoreCollection(db, "Products");
     const data = await getDocs(collectionRef);  
     return data;
 };
 
 const readDocument = (collection, id) => {
-    return getDoc(doc(firestoreCollection(firestore, collection), id));
+    return getDoc(doc(firestoreCollection(db, collection), id));
 };
 
 const updateDocument = (collection, id, document) => {
     return updateDoc(
-        doc(firestoreCollection(firestore, collection), id),
+        doc(firestoreCollection(db, collection), id),
         document
     );
 };
 
 const deleteDocument = (collection, id) => {
-    return deleteDoc(doc(firestoreCollection(firestore, collection), id));
+    return deleteDoc(doc(firestoreCollection(db, collection), id));
 };
 
 const FirebaseFirestoreService = {

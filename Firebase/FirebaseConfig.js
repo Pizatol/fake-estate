@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const config = {
@@ -11,21 +11,13 @@ const config = {
     storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
     messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
     appId: process.env.NEXT_PUBLIC_APP_ID,
-    
 };
-
-
-
 
 const firebaseApp = initializeApp(config);
-const auth = getAuth(firebaseApp);
-const firestore = getFirestore(firebaseApp);
-const storage = getStorage(firebaseApp);
+ export const auth = getAuth(firebaseApp);
+ export const db = getFirestore(firebaseApp);
+ export const storage = getStorage(firebaseApp);
 
-const firebaseConfig = {
-    auth,
-    firestore,
-    storage,
-};
 
-export default firebaseConfig;
+
+

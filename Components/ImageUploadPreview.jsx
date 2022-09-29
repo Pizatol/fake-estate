@@ -12,66 +12,37 @@ import {
     refFromURL,
     deleteObject,
 } from "firebase/storage";
-import { reload } from "firebase/auth";
 
-export default function ImageUploadPreview( {handleAddImages} ) {
+export default function ImageUploadPreview({
+    onImageState,
+    onImageUpload,
+    imageFetched,
+    onDeleteImage,
+    reference
+}) {
     const [imagesUrl, setImagesUrl] = useState([]);
-    const [imagesUpload, setImagesUpload] = useState(null);
 
-    const imageListRef = ref(firebaseConfig.storage, "Images/");
-
-    
+    // const imageListRef = ref(firebaseConfig.storage, `${id}`);
 
     useEffect(() => {
-        fetchImages();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        setImagesUrl(imageFetched);
+    }, [imageFetched]);
 
-    const fetchImages = () => {
-        listAll(imageListRef).then((response) => {
-            response.items.forEach((item) => {
-                const name = item.name;
-                getDownloadURL(item).then((url) => {
-                    setImagesUrl((prev) => [...prev, { name, url }]);
-                });
-            });
-        });
-    };
-
-    const uploadImages = () => {
-        if (imagesUpload === null) return;
-
-        // changer le random par le ID du dossier
-        const imageRef = ref(firebaseConfig.storage, `Images/${uuid()}`);
-        uploadBytes(imageRef, imagesUpload).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                setImagesUrl((prev) => [...prev, url]);
-                handleAddImages(imagesUrl)
-                window.location.reload();
-            });
-        });
-    };
-
-    const deleteFromFirebase = (e) => {
-        const deleteImgRef = ref(firebaseConfig.storage, `Images/${e.name}`);
-        deleteObject(deleteImgRef).then(() => {
-            alert("Successfully deleted ");
-            window.location.reload();
-        });
-
-
-    };
     return (
         <>
             <div className={css.global_container}>
                 <input
+                    required
                     type="file"
                     onChange={(e) => {
-                        setImagesUpload(e.target.files[0]);
+                        onImageState(e.target.files[0]);
                     }}
                 />
 
-                <button onClick={uploadImages}> Upload </button>
+                <button type="button" onClick={onImageUpload}>
+                    {" "}
+                    Upload{" "}
+                </button>
                 <div className={css.image_container}>
                     {imagesUrl.map((img, index) => (
                         <div className={css.image} key={index}>
@@ -83,11 +54,12 @@ export default function ImageUploadPreview( {handleAddImages} ) {
                                 alt={img}
                             />
                             <button
+                                type="button"
                                 onClick={() => {
-                                    deleteFromFirebase(img);
+                                    onDeleteImage();
                                 }}
                             >
-                                XX
+                                cancel
                             </button>
                         </div>
                     ))}

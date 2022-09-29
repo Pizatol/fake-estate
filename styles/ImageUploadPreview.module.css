@@ -1,9 +1,9 @@
-.global_container {
+.global_container_preview {
   height: auto;
   width: auto;
 }
 
-.image_container {
+.image_container_preview {
   display: flex;
   flex-direction: row;
   width: 600px;

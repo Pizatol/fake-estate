@@ -1,4 +1,5 @@
 import firebase from './FirebaseConfig';
+import { storage } from './FirebaseConfig';
 
 import {
   ref,
@@ -7,7 +8,7 @@ import {
   deleteObject,
 } from 'firebase/storage';
 
-const storage = firebase.storage;
+
 
 const uploadFile = async (file, fullFilePath, progressCallback) => {
   const uploadRef = ref(storage, fullFilePath);

@@ -4,63 +4,67 @@ import FirebaseAuthService from "../Firebase/FirebaseAuthService";
 import css from "../styles/NavBar.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import logoFakeEstate from '../Assets/logo/logoFakeEstate.png'
-import loginLogo from '../Assets/icons/login_icon.svg'
-import logoutLogo from '../Assets/icons/logout_icon.svg'
+import logoFakeEstate from "../Assets/logo/logoFakeEstate.png";
+import loginLogo from "../Assets/icons/login_icon.svg";
+import logoutLogo from "../Assets/icons/logout_icon.svg";
 
 export default function NavBar({ existingUser }) {
     const { formOn, setFormOn } = useContext(LoginContext);
     const { user, setUser } = useContext(LoginContext);
+
+    const router = useRouter();
 
     const toggleForm = () => {
         setFormOn(!formOn);
     };
     function handleLogout() {
         FirebaseAuthService.logoutUser();
+        router.push("/");
 
-        alert('You are now log OUT')
-        
+        alert("You are now log OUT");
     }
 
     return (
         <div className={css.global_container}>
             <Link href="/">
-               <a >LOGO</a>
+                <a>LOGO</a>
             </Link>
             <div className={css.buttons_navigation_container}>
-                <Link
-                href="/SellPage"
-                >
+                <Link href="/SellPage">
                     <button>Vente</button>
                 </Link>
-               <Link  href="/LocationPage" >
-                <button>Location</button>
-               </Link>
-                <div>BOUTON1</div>
+                <Link href="/LocationPage">
+                    <button>Location</button>
+                </Link>
+                {user ? (
+                    <Link href="/NewProductPage">
+                        <button>New Product</button>
+                    </Link>
+                ) : null}
             </div>
-            
 
             {user ? (
                 <button onClick={handleLogout}>
-                <Image
-                    src={logoutLogo}
-                    width={20}
-                    height={20}
-                    alt="Log Out button"
-                />
+                    <Image
+                        src={logoutLogo}
+                        width={20}
+                        height={20}
+                        alt="Log Out button"
+                    />
                 </button>
             ) : (
-                <button onClick={toggleForm}>
-                <Image
-                    src={loginLogo}
-                    width={20}
-                    height={20}
-                    alt="Log In button"
-                />
-                    
-                   
-                </button>
+                
+                    <button onClick={toggleForm}>
+                        <Image
+                            src={loginLogo}
+                            width={20}
+                            height={20}
+                            alt="Log In button"
+                        />
+                    </button>
+               
             )}
         </div>
     );
