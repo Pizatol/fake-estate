@@ -8,11 +8,12 @@
   margin: auto;
   max-width: var(--maxWidth1);
   /* max-width: 1200px; */
+  width: var(--width1);
   height: 300px;
   /* border: 1px solid red; */
 }
 
 .carousel_image_container {
-  height: 1000px;
+  height: 500px;
   opacity: 70%;
 }/*# sourceMappingURL=Carousel.module.css.map */

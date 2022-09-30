@@ -34,14 +34,23 @@ import Carousel from "../Components/Carousel";
 import CreateEditForm from "../Components/CreateEditForm";
 
 export default function Home() {
-
-    const { user, setUser } = useContext(LoginContext);
+    const dataCollectionRef = collection(db, "test");
+    const { user, setUser,  products, setProducts } = useContext(LoginContext);
     FirebaseAuthService.subscribeToAuthChanges(setUser);
     // const dataCollectionRef = collection(db, "test");
 
-    const [products, setProducts] = useState([]);
+   
+    const fetchData = async () => {
+        const data = await getDocs(dataCollectionRef);
+        setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 
+       
+    };
   
+    useEffect(() => {
+        fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
    
     return (

@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import css from "../styles/Sell_Location.module.scss";
+import { LoginContext } from "../context/LoginContext";
 import { db } from "../Firebase/FirebaseConfig";
 import firebaseConfig from "../Firebase/FirebaseConfig";
+import FirebaseAuthService from "../Firebase/FirebaseAuthService";
 import {
     collection,
     getDocs,
@@ -8,7 +11,7 @@ import {
     updateDoc,
     deleteDoc,
     doc,
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
 
 import FirebaseFirestoreService from "../Firebase/FirebaseFirestoreService";
 
@@ -17,13 +20,33 @@ import LoginForm from "../Components/LoginForm";
 import ProductMiniCard from "../Components/ProductMiniCard";
 
 export default function SellPage() {
+    const { user, setUser, products, setProducts } = useContext(LoginContext);
+    FirebaseAuthService.subscribeToAuthChanges(setUser);
 
-    const [products, setProducts] = useState();
+    // const [products, setProducts] = useContext();
+    const [selectedProducts, setSelectedProducts] = useState([]);
+    const dataCollectionRef = collection(db, "test");
 
-    const collectionRef = collection(db, "Products");
+    const fetchData = async () => {
+        const data = await getDocs(dataCollectionRef);
+        setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+        filteringData();
+    };
+
+    const filteringData = async () => {
+        if (products) {
+            const filterArray = await products.filter(
+                (item) => item.sellRental === "sell"
+            );
+            setSelectedProducts(filterArray);
+        }
+    };
 
     useEffect(() => {
-       
+        fetchData();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -31,13 +54,13 @@ export default function SellPage() {
             <NavBar />
             <LoginForm />
 
-            <div>sellPage</div>
+            <div>sell Page</div>
 
-            {products
-                ? products.map((product, index) => {
+            {selectedProducts
+                ? selectedProducts.map((product, index) => {
                       return (
                           <ProductMiniCard
-                              key={index}
+                              key={product.reference}
                               name={product.name}
                               adress={product.adress}
                               price={product.price}
@@ -49,7 +72,7 @@ export default function SellPage() {
                               textSmmary={product.textSummary}
                               sellRental={product.sellRental}
                               publishDate={product.publishDate}
-                              imageUrl={product.imageUrl[0]}
+                              images={product.dataImage}
                           />
                       );
                   })
@@ -57,25 +80,3 @@ export default function SellPage() {
         </div>
     );
 }
-
-// DANS LE USEEFFECT
-
-// const getUsers = async () => {
-//     let fetchedProducts = [];
-//     const response = await getDocs(collectionRef);
-
-//     const newProducts = response.docs.map((productDoc) => {
-//         const id = productDoc.id;
-//         const data = productDoc.data();
-//         data.publishDate = new Date(data.publishDate.seconds * 1000);
-
-//         return {
-//             ...data,
-//             id,
-//         };
-//     });
-//     fetchedProducts = [...newProducts];
-
-//     setProducts(fetchedProducts);
-// };
-// getUsers();

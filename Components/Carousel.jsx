@@ -36,10 +36,10 @@ export default function Carousel() {
                 slidesPerView={1}
                 loop={true}
             >
-                {imgArr.map((img) => (
+                {imgArr.map((img, index) => (
                     <SwiperSlide
                         className={css.carousel_image_container}
-                        key={img}
+                        key={index}
                     >
                         <Image
                             src={img}
@@ -51,60 +51,7 @@ export default function Carousel() {
                     </SwiperSlide>
                 ))}
 
-                {/* <SwiperSlide className={css.carousel_image_container}>
-                    <Image
-                        src={img1}
-                        width={1932}
-                        heigh={1288}
-                        layout="responsive"
-                        alt="picture carousel"
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={css.carousel_image_container}>
-                    <Image
-                        src={img2}
-                        width={1932}
-                        heigh={1288}
-                        layout="responsive"
-                        alt="picture carousel"
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={css.carousel_image_container}>
-                    <Image
-                        src={img3}
-                        width={1932}
-                        heigh={1288}
-                        layout="responsive"
-                        alt="picture carousel"
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={css.carousel_image_container}>
-                    <Image
-                        src={img4}
-                        width={1932}
-                        heigh={1288}
-                        layout="responsive"
-                        alt="picture carousel"
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={css.carousel_image_container}>
-                    <Image
-                        src={img5}
-                        width={1932}
-                        heigh={1288}
-                        layout="responsive"
-                        alt="picture carousel"
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={css.carousel_image_container}>
-                    <Image
-                        src={img6}
-                        width={1932}
-                        heigh={1288}
-                        layout="responsive"
-                        alt="picture carousel"
-                    />
-                </SwiperSlide> */}
+               
             </Swiper>
         </div>
     );

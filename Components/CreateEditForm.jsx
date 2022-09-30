@@ -35,12 +35,11 @@ export default function CreateEditForm() {
     const dataCollectionRef = collection(db, "test");
 
     const imageListRef = ref(storage, "/images");
-
-    const [products, setProducts] = useState([]);
+ 
 
     const [globalData, setGlobalData] = useState([]);
 
-    const [reference, setReference] = useState("");
+    const [reference, setReference] = useState(0);
     const [adress, setAdress] = useState("");
     const [price, setPrice] = useState(0);
     const [surface, setSurface] = useState(0);
@@ -59,7 +58,7 @@ export default function CreateEditForm() {
     );
 
     const handleFormSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         const isPublished = new Date(publishDate) <= new Date() ? true : false;
 
         const newProduct = {
@@ -73,28 +72,25 @@ export default function CreateEditForm() {
             textDetailled,
             textSummary,
             sellRental,
-            publishDate: new Date(publishDate),
             isPublished,
             dataImage,
+            publishDate: new Date(publishDate)
         };
-
-        if (!dataImage) {
-            alert("Missing image, please add at least one image");
-            return;
-        }
-
+        
         try {
             await addDoc(dataCollectionRef, newProduct);
-            resetForm();
             alert("Product added successfully");
+            resetForm()
+            
         } catch (error) {
             console.log(error.message);
             alert("Error adding product");
         }
+        
     };
 
     const resetForm = () => {
-        setReference("");
+        setReference(0);
         setAdress("");
         setPrice("");
         setSurface("");
@@ -146,8 +142,7 @@ export default function CreateEditForm() {
         });
     };
 
-    // RELOAD
-    console.log("RELOAD");
+  
 
     // DELETE
     const deleteFromFirebase = (id, image) => {
@@ -163,8 +158,8 @@ export default function CreateEditForm() {
                         Ref
                         <input
                             onChange={(e) => setReference(e.target.value)}
-                            type="text"
-                            placeholder="Name : "
+                            type="number"
+                            placeholder="Reference : "
                             required
                             value={reference}
                         />
