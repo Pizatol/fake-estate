@@ -1,6 +1,11 @@
+.global_container {
+  max-width: var(--maxWidth1);
+  margin: auto;
+}
+
 .form_container {
   display: flex;
-  max-width: 1500px;
+  justify-content: center;
 }
 
 .form_name,
@@ -168,7 +173,6 @@
   flex-direction: row;
   width: 600px;
   height: 200px;
-  border: 1px solid green;
 }
 
 .image {

@@ -1,7 +1,5 @@
-
-
 import React, { useState, useEffect, useContext } from "react";
-import css from '../styles/Sell_Location.module.scss'
+import css from "../styles/Sell_Location.module.scss";
 import Link from "next/link";
 import { LoginContext } from "../context/LoginContext";
 import { db } from "../Firebase/FirebaseConfig";
@@ -30,7 +28,6 @@ export default function SellPage() {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const dataCollectionRef = collection(db, "test");
 
-   
     const fetchData = async () => {
         const data = await getDocs(dataCollectionRef);
         setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -47,10 +44,8 @@ export default function SellPage() {
         }
     };
 
-
     console.log("RELOAD SELL PAGE");
     useEffect(() => {
-       
         fetchData();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,30 +60,31 @@ export default function SellPage() {
 
             {selectedProducts
                 ? selectedProducts.map((product, index) => {
-
                       return (
-
-								<Link href={`/${product.id}`} reference={product.reference} key={index}>
-								<a >
-
-                          <ProductMiniCard
+                          <Link
+                              href={`/${product.id}`}
                               reference={product.reference}
-										id={product.id}
-                              name={product.name}
-                              adress={product.adress}
-                              price={product.price}
-                              surface={product.surface}
-                              floor={product.floor}
-                              elevator={product.elevator}
-                              heating={product.heating}
-                              textDetailled={product.textDetailled}
-                              textSmmary={product.textSummary}
-                              sellRental={product.sellRental}
-                              publishDate={product.publishDate}
-                              images={product.dataImage}
-                          />
-								</a>
-								</Link>
+                              key={index}
+                          >
+                              <a>
+                                  <ProductMiniCard
+                                      reference={product.reference}
+                                      id={product.id}
+                                      name={product.name}
+                                      adress={product.adress}
+                                      price={product.price}
+                                      surface={product.surface}
+                                      floor={product.floor}
+                                      elevator={product.elevator}
+                                      heating={product.heating}
+                                      textDetailled={product.textDetailled}
+                                      textSmmary={product.textSummary}
+                                      sellRental={product.sellRental}
+                                      publishDate={product.publishDate}
+                                      images={product.dataImage}
+                                  />
+                              </a>
+                          </Link>
                       );
                   })
                 : null}
@@ -96,24 +92,3 @@ export default function SellPage() {
     );
 }
 
-// DANS LE USEEFFECT
-
-// const getUsers = async () => {
-//     let fetchedProducts = [];
-//     const response = await getDocs(collectionRef);
-
-//     const newProducts = response.docs.map((productDoc) => {
-//         const id = productDoc.id;
-//         const data = productDoc.data();
-//         data.publishDate = new Date(data.publishDate.seconds * 1000);
-
-//         return {
-//             ...data,
-//             id,
-//         };
-//     });
-//     fetchedProducts = [...newProducts];
-
-//     setProducts(fetchedProducts);
-// };
-// getUsers();

@@ -1,13 +1,52 @@
 .global_container {
-	max-width: var(--maxWidth1) ;
-	display: flex;
-	justify-content: space-between ;
-	margin: 30px auto;
-	position: relative;
-	z-index: 6;
+    max-width: var(--maxWidth1);
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px auto;
+    position: relative;
+    z-index: 6;
 }
 
 .buttons_navigation_container {
-	display: flex;
-	
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 500px;
+    width: 30%;
+    height: 100px;
+}
+
+.button_navigation {
+    position: relative;
+    font-family: var(--text-font);
+    font-size: var(--fontSize1);
+    font-weight: 500;
+    color: var(--darkColor1);
+    border-bottom: 0px;
+    transition: all 0.3s ease;
+    //  overflow: hidden;
+}
+.button_navigation::before {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    width: 0%;
+    border-bottom: 2px solid var(--redColor1);
+    top: 100%;
+    left: 50%;
+    transition: all 0.3s ease;
+}
+.button_navigation:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.button_navigation:hover {
+    color: var(--darkColor2);
+}
+
+.login_logout_button {
+	cursor: pointer;
 }

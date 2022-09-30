@@ -1,5 +1,5 @@
 .global_container {
-  max-width: 1000px;
+  max-width: var(--maxWidth1);
   margin: auto;
 }
 

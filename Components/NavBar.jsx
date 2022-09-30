@@ -28,44 +28,56 @@ export default function NavBar({ existingUser }) {
 
     return (
         <div className={css.global_container}>
-            <Link href="/">
-                <a>LOGO</a>
-            </Link>
+            <div>
+                <Link href="/">
+                    <a className={css.logo_navigation}>
+                        <Image
+                            src={logoFakeEstate}
+                            width={100}
+                            height={100}
+                            alt='Brand Logo'
+                        />
+                    </a>
+                </Link>
+            </div>
             <div className={css.buttons_navigation_container}>
                 <Link href="/SellPage">
-                    <button>Vente</button>
+                    <a className={css.button_navigation}>VENTE</a>
                 </Link>
                 <Link href="/LocationPage">
-                    <button>Location</button>
+                    <a className={css.button_navigation}>LOCATION</a>
                 </Link>
+                <Link href="/">
+                    <a className={css.button_navigation}> A PROPOS</a>
+                </Link>
+
                 {user ? (
                     <Link href="/NewProductPage">
                         <button>New Product</button>
                     </Link>
                 ) : null}
             </div>
-
-            {user ? (
-                <button onClick={handleLogout}>
-                    <Image
-                        src={logoutLogo}
-                        width={20}
-                        height={20}
-                        alt="Log Out button"
-                    />
-                </button>
-            ) : (
-                
-                    <button onClick={toggleForm}>
+            <div>
+                {user ? (
+                    <a  className={css.login_logout_button} onClick={handleLogout}>
+                        <Image
+                            src={logoutLogo}
+                            width={20}
+                            height={20}
+                            alt="Log Out button"
+                        />
+                    </a>
+                ) : (
+                    <a className={css.login_logout_button} onClick={toggleForm}>
                         <Image
                             src={loginLogo}
                             width={20}
                             height={20}
                             alt="Log In button"
                         />
-                    </button>
-               
-            )}
+                    </a>
+                )}
+            </div>
         </div>
     );
 }

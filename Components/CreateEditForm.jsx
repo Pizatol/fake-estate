@@ -26,8 +26,6 @@ import {
     deleteField,
 } from "firebase/firestore";
 
-import ImageUploadPreview from "./ImageUploadPreview";
-
 export default function CreateEditForm() {
     const { user, setUser } = useContext(LoginContext);
     FirebaseAuthService.subscribeToAuthChanges(setUser);
@@ -35,15 +33,20 @@ export default function CreateEditForm() {
     const dataCollectionRef = collection(db, "test");
 
     const imageListRef = ref(storage, "/images");
- 
 
     const [globalData, setGlobalData] = useState([]);
 
-    const [reference, setReference] = useState(0);
+    const [reference, setReference] = useState();
     const [adress, setAdress] = useState("");
-    const [price, setPrice] = useState(0);
-    const [surface, setSurface] = useState(0);
-    const [floor, setFloor] = useState(0);
+
+    const [city, setCity] = useState("");
+
+    const [price, setPrice] = useState();
+    const [surface, setSurface] = useState();
+
+    const [nbRooms, setNbRooms] = useState();
+
+    const [floor, setFloor] = useState();
     const [elevator, setElevator] = useState("");
     const [heating, setHeating] = useState("");
     const [textDetailled, setTextDetailled] = useState("");
@@ -64,7 +67,9 @@ export default function CreateEditForm() {
         const newProduct = {
             reference,
             adress,
+            city,
             price,
+            nbRooms,
             surface,
             floor,
             elevator,
@@ -74,27 +79,27 @@ export default function CreateEditForm() {
             sellRental,
             isPublished,
             dataImage,
-            publishDate: new Date(publishDate)
+            publishDate: new Date(publishDate),
         };
-        
+
         try {
             await addDoc(dataCollectionRef, newProduct);
             alert("Product added successfully");
-            resetForm()
-            
+            resetForm();
         } catch (error) {
             console.log(error.message);
             alert("Error adding product");
         }
-        
     };
 
     const resetForm = () => {
-        setReference(0);
+        setReference("");
         setAdress("");
         setPrice("");
+        setCity("");
         setSurface("");
         setFloor("");
+        setNbRooms("");
         setElevator("");
         setHeating("");
         setTextDetailled("");
@@ -142,8 +147,6 @@ export default function CreateEditForm() {
         });
     };
 
-  
-
     // DELETE
     const deleteFromFirebase = (id, image) => {
         console.log("deleteFromFirebase", id, image);
@@ -175,6 +178,16 @@ export default function CreateEditForm() {
                             value={adress}
                         />
                     </label>
+                    <label className={css.form_adress}>
+                        City
+                        <input
+                            onChange={(e) => setCity(e.target.value)}
+                            type="text"
+                            placeholder="City : "
+                            required
+                            value={city}
+                        />
+                    </label>
 
                     <label className={css.form_price}>
                         Price
@@ -195,6 +208,16 @@ export default function CreateEditForm() {
                             placeholder="Surface"
                             required
                             value={surface}
+                        />
+                    </label>
+                    <label className={css.form_surface}>
+                        Room Numbers
+                        <input
+                            onChange={(e) => setNbRooms(e.target.value)}
+                            type="number"
+                            placeholder="Room numbers"
+                            required
+                            value={nbRooms}
                         />
                     </label>
 
@@ -260,7 +283,7 @@ export default function CreateEditForm() {
                     >
                         Sell or Locate :
                         <select>
-                            <option value="" defaultValue={""}></option>
+                            
                             <option value="sell">Sell</option>
                             <option value="location">Location</option>
                         </select>
@@ -324,3 +347,10 @@ export default function CreateEditForm() {
         </div>
     );
 }
+
+
+// Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe enim rem natus consequatur maiores necessitatibus velit adipisci! Quos ipsam architecto quas sapiente hic. Qui iure nobis eos, esse illo a.
+// 
+
+
+// Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium fuga excepturi officiis. Impedit, vel. Voluptas ad optio quam ipsam quidem ratione voluptate dolor laborum sequi, officiis commodi animi suscipit, facilis amet assumenda debitis nobis aperiam pariatur? Voluptate molestias distinctio dignissimos! Est magni corrupti mollitia dolor numquam id deleniti repellendus. Sed!

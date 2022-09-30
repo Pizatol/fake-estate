@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import css from "../styles/Sell_Location.module.scss";
+import Link from "next/link";
 import { LoginContext } from "../context/LoginContext";
 import { db } from "../Firebase/FirebaseConfig";
 import firebaseConfig from "../Firebase/FirebaseConfig";
@@ -54,29 +55,40 @@ export default function SellPage() {
             <NavBar />
             <LoginForm />
 
-            <div>sell Page</div>
-
-            {selectedProducts
-                ? selectedProducts.map((product, index) => {
-                      return (
-                          <ProductMiniCard
-                              key={product.reference}
-                              name={product.name}
-                              adress={product.adress}
-                              price={product.price}
-                              surface={product.surface}
-                              floor={product.floor}
-                              elevator={product.elevator}
-                              heating={product.heating}
-                              textDetailled={product.textDetailled}
-                              textSmmary={product.textSummary}
-                              sellRental={product.sellRental}
-                              publishDate={product.publishDate}
-                              images={product.dataImage}
-                          />
-                      );
-                  })
-                : null}
+            <div className={css.mini_card_container}>
+                {selectedProducts
+                    ? selectedProducts.map((product, index) => {
+                          return (
+                              <div className={css.mini_card} key={index}>
+                                  <Link
+                                      href={`/${product.id}`}
+                                      reference={product.reference}
+                                  >
+                                      <a className={css.mini_card_link}>
+                                          <ProductMiniCard
+                                              key={product.reference}
+                                              name={product.name}
+                                              adress={product.adress}
+                                              price={product.price}
+                                              surface={product.surface}
+                                              floor={product.floor}
+                                              elevator={product.elevator}
+                                              heating={product.heating}
+                                              textDetailled={
+                                                  product.textDetailled
+                                              }
+                                              textSmmary={product.textSummary}
+                                              sellRental={product.sellRental}
+                                              publishDate={product.publishDate}
+                                              images={product.dataImage}
+                                          />
+                                      </a>
+                                  </Link>
+                              </div>
+                          );
+                      })
+                    : null}
+            </div>
         </div>
     );
 }
