@@ -1,21 +1,20 @@
 .slug_global_container {
     max-width: var(--maxWidth1);
-
+	
     height: auto;
 }
 .slug_carousel_container {
-    border: 1px solid green;
+   
     // background: blue;
     max-width: var(--maxWidth1);
     width: 1000px;
     height: 1000px;
+	 margin: auto;
 }
 
 .slug_img_container {
     max-width: var(--maxWidth1);
     height: 1000px;
     width: 1000px;
-    h1 {
-        color: red;
-    }
+   
 }
