@@ -56,39 +56,42 @@ export default function SellPage() {
             <NavBar />
             <LoginForm />
 
-            <div>Location Page</div>
-
-            {selectedProducts
-                ? selectedProducts.map((product, index) => {
-                      return (
-                          <Link
-                              href={`/${product.id}`}
-                              reference={product.reference}
-                              key={index}
-                          >
-                              <a>
-                                  <ProductMiniCard
+            <div className={css.mini_card_container}>
+                {selectedProducts
+                    ? selectedProducts.map((product, index) => {
+                          return (
+                              <div key={index} className={css.mini_card}>
+                                  <Link
+                                      href={`/${product.id}`}
                                       reference={product.reference}
-                                      id={product.id}
-                                      name={product.name}
-                                      adress={product.adress}
-                                      price={product.price}
-                                      surface={product.surface}
-                                      floor={product.floor}
-                                      elevator={product.elevator}
-                                      heating={product.heating}
-                                      textDetailled={product.textDetailled}
-                                      textSmmary={product.textSummary}
-                                      sellRental={product.sellRental}
-                                      publishDate={product.publishDate}
-                                      images={product.dataImage}
-                                  />
-                              </a>
-                          </Link>
-                      );
-                  })
-                : null}
+                                      className={css.mini_card}
+                                  >
+                                      <a className={css.mini_card_link}>
+                                          <ProductMiniCard
+                                              reference={product.reference}
+                                              id={product.id}
+                                              name={product.name}
+                                              adress={product.adress}
+                                              price={product.price}
+                                              surface={product.surface}
+                                              floor={product.floor}
+                                              elevator={product.elevator}
+                                              heating={product.heating}
+                                              textDetailled={
+                                                  product.textDetailled
+                                              }
+                                              textSmmary={product.textSummary}
+                                              sellRental={product.sellRental}
+                                              publishDate={product.publishDate}
+                                              images={product.dataImage}
+                                          />
+                                      </a>
+                                  </Link>
+                              </div>
+                          );
+                      })
+                    : null}
+            </div>
         </div>
     );
 }
-

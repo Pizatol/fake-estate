@@ -28,7 +28,18 @@
   transition: all 0.3s ease;
 }
 
-.button_navigation::before {
+.button_new_product {
+  position: relative;
+  font-family: var(--text-font);
+  font-size: var(--fontSize1);
+  font-weight: 500;
+  color: var(--redColor1);
+  border-bottom: 0px;
+  transition: all 0.3s ease;
+}
+
+.button_navigation::before,
+.button_new_product::before {
   content: "";
   position: absolute;
   z-index: 10;
@@ -39,7 +50,8 @@
   transition: all 0.3s ease;
 }
 
-.button_navigation:hover::before {
+.button_navigation:hover::before,
+.button_new_product:hover::before {
   width: 100%;
   left: 0;
 }

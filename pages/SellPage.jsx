@@ -38,7 +38,7 @@ export default function SellPage() {
     const filteringData = async () => {
         if (products) {
             const filterArray = await products.filter(
-                (item) => item.sellRental === "sell"
+                (item) => item.sellRental === "achat"
             );
             setSelectedProducts(filterArray);
         }
@@ -66,11 +66,13 @@ export default function SellPage() {
                                   >
                                       <a className={css.mini_card_link}>
                                           <ProductMiniCard
-                                              key={product.reference}
+                                              reference={product.reference}
                                               name={product.name}
                                               adress={product.adress}
+                                              city={product.city}
                                               price={product.price}
                                               surface={product.surface}
+                                              nbRooms={product.nbRooms}
                                               floor={product.floor}
                                               elevator={product.elevator}
                                               heating={product.heating}
@@ -92,3 +94,18 @@ export default function SellPage() {
         </div>
     );
 }
+
+// reference,
+// adress,
+// city,
+// price,
+// nbRooms,
+// surface,
+// floor,
+// elevator,
+// heating,
+// textDetailled,
+// textSummary,
+// sellRental,
+// isPublished,
+// dataImage,

@@ -38,6 +38,7 @@ export default function CreateEditForm() {
 
     const [reference, setReference] = useState();
     const [adress, setAdress] = useState("");
+    const [goodType, setGoodType] = useState("");
 
     const [city, setCity] = useState("");
 
@@ -68,6 +69,7 @@ export default function CreateEditForm() {
             reference,
             adress,
             city,
+            goodType,
             price,
             nbRooms,
             surface,
@@ -97,6 +99,7 @@ export default function CreateEditForm() {
         setAdress("");
         setPrice("");
         setCity("");
+        setGoodType("");
         setSurface("");
         setFloor("");
         setNbRooms("");
@@ -148,8 +151,47 @@ export default function CreateEditForm() {
     };
 
     // DELETE
-    const deleteFromFirebase = (id, image) => {
-        console.log("deleteFromFirebase", id, image);
+    // const deleteFromFirebase = (id, image) => {
+    //     console.log("deleteFromFirebase", id, image);
+    // };
+
+    const deleteImage = (e) => {
+        const imageSelectRef = ref(storage, `/images/${e.name}`);
+
+        deleteObject(imageSelectRef)
+            .then(() => {
+                const filterArr = dataImage.filter(
+                    (item) => item.name !== e.name
+                );
+                setDataImage(filterArr);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+
+        // const userDoc = doc(db, "test", id);
+
+        // let imagesNames = [];
+        // if (image) {
+        //     for (let img of image) {
+        //         imagesNames.push(img.name);
+        //     }
+
+        //     for (let i = 0; i < imagesNames.length; i++) {
+        //         const imgRef = ref(imageListRef, imagesNames[i]);
+        //         deleteObject(imgRef)
+        //             .then(() => {
+        //                 console.log("image deleted");
+        //             })
+        //             .catch((error) => {
+        //                 console.log(error.message);
+        //             });
+        //     }
+        // }
+
+        // updateDoc(userDoc, {
+        //     image: deleteField(),
+        // });
     };
 
     // *****************
@@ -200,6 +242,25 @@ export default function CreateEditForm() {
                         />
                     </label>
 
+                    <label
+                        onChange={(e) => setGoodType(e.target.value)}
+                        className={css.form_select}
+                        value={goodType}
+                        required
+                    >
+                        Type :
+                        <select>
+                            <option
+                                value={goodType}
+                                selected
+                                
+                            ></option>
+                            <option selected value="appartement">Appartement</option>
+                            <option value="maison">Maison</option>
+                            <option value="chateau">Château</option>
+                        </select>
+                    </label>
+
                     <label className={css.form_surface}>
                         Surface
                         <input
@@ -242,7 +303,7 @@ export default function CreateEditForm() {
                         />
                     </label>
 
-                    <label className={css.form_elevator} required>
+                    <label className={css.form_select} required>
                         Elevator:
                         <select
                             required
@@ -277,14 +338,13 @@ export default function CreateEditForm() {
 
                     <label
                         onChange={(e) => setSellRental(e.target.value)}
-                        className={css.form_sellLocate}
+                        className={css.form_select}
                         value={sellRental}
                         required
                     >
                         Sell or Locate :
                         <select>
-                            
-                            <option value="sell">Sell</option>
+                            <option selected value="achat">Sell</option>
                             <option value="location">Location</option>
                         </select>
                     </label>
@@ -338,6 +398,14 @@ export default function CreateEditForm() {
                                         height={200}
                                         alt={img}
                                     />
+                                    <button
+                                    type="button"
+                                        onClick={() => {
+                                            deleteImage(img);
+                                        }}
+                                    >
+                                        delete images
+                                    </button>
                                 </div>
                             ))}
                         </div>
@@ -348,9 +416,7 @@ export default function CreateEditForm() {
     );
 }
 
-
 // Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe enim rem natus consequatur maiores necessitatibus velit adipisci! Quos ipsam architecto quas sapiente hic. Qui iure nobis eos, esse illo a.
-// 
-
+//
 
 // Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium fuga excepturi officiis. Impedit, vel. Voluptas ad optio quam ipsam quidem ratione voluptate dolor laborum sequi, officiis commodi animi suscipit, facilis amet assumenda debitis nobis aperiam pariatur? Voluptate molestias distinctio dignissimos! Est magni corrupti mollitia dolor numquam id deleniti repellendus. Sed!

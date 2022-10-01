@@ -1,1 +1,20 @@
-/*# sourceMappingURL=slug.module.css.map */
+.slug_global_container {
+  max-width: var(--maxWidth1);
+  height: auto;
+}
+
+.slug_carousel_container {
+  border: 1px solid green;
+  max-width: var(--maxWidth1);
+  width: 1000px;
+  height: 1000px;
+}
+
+.slug_img_container {
+  max-width: var(--maxWidth1);
+  height: 1000px;
+  width: 1000px;
+}
+.slug_img_container h1 {
+  color: red;
+}/*# sourceMappingURL=slug.module.css.map */

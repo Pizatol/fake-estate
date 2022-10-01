@@ -70,42 +70,37 @@
   outline: none;
 }
 
-.form_elevator,
-.form_sellLocate,
+.form_select,
 .form_publishDate {
-  width: 200px;
+  width: 300px;
   margin: 10px 0 15px 10px;
   font-family: var(--text-font);
   font-size: var(--fontSize1);
   color: var(--darkColor1);
 }
-.form_elevator select,
-.form_elevator input,
-.form_sellLocate select,
-.form_sellLocate input,
+.form_select select,
+.form_select input,
 .form_publishDate select,
 .form_publishDate input {
-  width: 40px;
-  height: 20px;
+  width: 120px;
+  height: 30px;
   font-family: var(--text-font);
   font-size: var(--fontSize1);
+  margin-top: 10px;
   margin-bottom: 15px;
   margin-left: 10px;
   border-radius: 3px;
 }
-.form_elevator select:focus,
-.form_sellLocate select:focus,
+.form_select select:focus,
 .form_publishDate select:focus {
   border: 2px solid var(--blueColor1);
   outline: none;
 }
-.form_elevator input,
-.form_sellLocate input,
+.form_select input,
 .form_publishDate input {
   width: 150px;
 }
-.form_elevator input:focus,
-.form_sellLocate input:focus,
+.form_select input:focus,
 .form_publishDate input:focus {
   border: 2px solid var(--blueColor1);
   outline: none;
@@ -125,8 +120,8 @@
   font-family: var(--text-font);
   font-size: var(--fontSize1);
   color: var(--darkColor1);
-  width: 400px;
-  height: 75px;
+  width: 800px;
+  height: 100px;
   padding-top: 10px;
   padding-left: 10px;
   margin-bottom: 15px;
@@ -171,8 +166,10 @@
 .image_container_preview {
   display: flex;
   flex-direction: row;
-  width: 600px;
-  height: 200px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  width: auto;
+  height: auto;
 }
 
 .image {

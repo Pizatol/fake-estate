@@ -53,7 +53,7 @@ export default function NavBar({ existingUser }) {
 
                 {user ? (
                     <Link href="/NewProductPage">
-                        <button>New Product</button>
+                        <a className={css.button_new_product} >New Product</a>
                     </Link>
                 ) : null}
             </div>

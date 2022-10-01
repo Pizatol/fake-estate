@@ -1,8 +1,10 @@
 .card_container {
   width: 500px;
-  height: 600px;
-  border: 1px solid red;
+  height: auto;
   margin: 80px;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .image_part_container {
@@ -13,9 +15,39 @@
 
 .image {
   width: 100%;
+  transition: all 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.1);
+}
+
+.text_part_container {
+  background-color: var(--darkColor2);
+  color: var(--whiteColor1);
+  padding: 5%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .name_price_container {
   width: 100%;
-  height: 50px;
+  height: auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--whiteColor1);
+}
+.name_price_container p {
+  margin: 5px 0;
+}
+
+.informations_container p {
+  overflow: hidden;
+  line-height: 2rem;
+  max-height: 8rem;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
 }/*# sourceMappingURL=ProductMiniCard.module.css.map */
