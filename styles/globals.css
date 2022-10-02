@@ -23,6 +23,7 @@ a {
   --text-font : 'DM Sans', sans-serif;
   --title-font : 'EB Garamond', serif;
 
+  --fontSize0 : 15px;
   --fontSize1 : 20px;
   --fontSize2 : 30px;
   --fontSize3 : 40px;
@@ -36,7 +37,8 @@ a {
   --darkColor2 : #4c4c4c ;
   --greyColor1 : #a19da0;
   --greyColor2 : #c8c8c8 ;
-  --whiteColor1 : #F1F1F1; 
+  --whiteColor1 : #F1F1F1;
+  --whiteColor2 : #F2F2F2; 
   
   /* --blueColor1 : rgb(106, 106, 233) ;
    */
