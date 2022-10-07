@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { LoginContext } from "../context/LoginContext";
+import FirebaseAuthService from "../Firebase/FirebaseAuthService";
 import LoginForm from "../Components/LoginForm";
 import NavBar from "../Components/NavBar";
 import SendMessage from "../Components/SendMessage";
@@ -25,8 +26,10 @@ export default function CustomPage() {
     const dataCollectionRef = collection(db, "test");
     const router = useRouter();
     const idItem = router.query.id;
-
+    
+    
     const { user, setUser, products, setProducts } = useContext(LoginContext);
+    FirebaseAuthService.subscribeToAuthChanges(setUser);
 
     const [product, setProduct] = useState("");
     const [productImg, setProductImg] = useState("");
@@ -122,34 +125,125 @@ export default function CustomPage() {
                                     </ul>
                                 </div>
                             </div>
-                            <div>
-                                <h4>Réglementation immobilière</h4>
-                                <div className={css.left_bottom_part}>
-                                    <div className={css.bottom_details}>
-                                        <div className={css.border_title}></div>
-                                        <div>
-                                            <div className={css.bottom_details_text}>
-                                                <p> Provision sur charges récupérables</p>
-                                                <p>300 € / Mois</p>
-                                            </div>
-                                            <div className={css.bottom_details_text}>
-                                                <p> Honoraires locataire</p>
-                                                <p>2070 €</p>
-                                            </div>
-                                            <div className={css.bottom_details_text}>
-                                                <p> Dépôt de garantie</p>
-                                                <p>3600 €</p>
-                                            </div>
 
-                                           
+                            {e.sellRental === "location" ? (
+                                <div>
+                                    <h4>Réglementation immobilière</h4>
+                                    <div className={css.left_bottom_part}>
+                                        <div className={css.bottom_details}>
+                                            <div
+                                                className={css.border_title}
+                                            ></div>
+                                            <div>
+                                                <div
+                                                    className={
+                                                        css.bottom_details_text
+                                                    }
+                                                >
+                                                    <p>
+                                                        {" "}
+                                                        Provision sur charges
+                                                        récupérables
+                                                    </p>
+                                                    <p>300 € / Mois</p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        css.bottom_details_text
+                                                    }
+                                                >
+                                                    <p> Honoraires locataire</p>
+                                                    <p>2070 €</p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        css.bottom_details_text
+                                                    }
+                                                >
+                                                    <p> Dépôt de garantie</p>
+                                                    <p>3600 €</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className={`${css.bottom_details} ${css.bottom_details_second}`}
+                                        >
+                                            <EnergyChartLogo />
+                                            { user ? 'YES' : "NO"}
                                         </div>
                                     </div>
+                                </div>
+                            ) : (
+                                <div>
+                                    <h4>Réglementation immobilière</h4>
+                                    <div className={css.left_bottom_part}>
+                                        <div className={css.bottom_details}>
+                                            <div
+                                                className={css.border_title}
+                                            ></div>
+                                            <div>
+                                                <div
+                                                    className={
+                                                        css.bottom_details_text
+                                                    }
+                                                >
+                                                    <p>
+                                                        Honoraires charge
+                                                        vendeur
+                                                    </p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        css.bottom_details_text
+                                                    }
+                                                >
+                                                    <p>Loi Carrez</p>
+                                                    <p> 10 m²</p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        css.bottom_details_text
+                                                    }
+                                                >
+                                                    <p>Taxe foncière</p>
+                                                    <p>130 € / an</p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        css.bottom_details_text
+                                                    }
+                                                >
+                                                    <p>
+                                                        Charges de copropriété
+                                                    </p>
+                                                    <p>300 € / an</p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        css.bottom_details_text
+                                                    }
+                                                >
+                                                    <p>
+                                                        nombre lot dans la
+                                                        copropriété
+                                                    </p>
+                                                    <p>23</p>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <div className={`${css.bottom_details} ${css.bottom_details_second}`}>
-                                        <EnergyChartLogo  />                                    
+                                        <div
+                                            className={`${css.bottom_details} ${css.bottom_details_second}`}
+                                        >
+                                            <EnergyChartLogo />
+                                            { user ? 'YES' : "NO"}
+
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                         <div>
                             <SendMessage />

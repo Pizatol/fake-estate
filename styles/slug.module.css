@@ -35,6 +35,7 @@
 
 .left_top_part p {
   font-size: var(--fontSize0);
+  line-height: 25px;
 }
 
 .details_lists {
@@ -49,7 +50,7 @@
 .details_lists li,
 .details_lists ul {
   list-style: none;
-  margin: 0;
+  margin: 3px 0;
   padding: 0;
 }
 
@@ -70,6 +71,9 @@
 .bottom_details_text {
   display: flex;
   justify-content: space-between;
+}
+.bottom_details_text p {
+  margin: 5px 0;
 }
 
 .bottom_details_second {
