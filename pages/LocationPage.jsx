@@ -92,6 +92,7 @@ export default function SellPage() {
                       })
                     : null}
             </div>
+            
         </div>
     );
 }

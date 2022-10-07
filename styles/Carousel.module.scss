@@ -1,21 +1,15 @@
 .carousel_container_global {
-	/* position: absolute; */
-	position: relative;
-	z-index: 1;
-	/* top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%); */
+    position: relative;
+    z-index: 1;
 
-	margin: auto;
-	max-width: var(--maxWidth1);
+    margin: auto;
+    max-width: var(--maxWidth1);
 
-	/* max-width: 1200px; */
-	width: var(--width1);
-	height: 300px;
-	/* border: 1px solid red; */
+    width: var(--width1);
+    height: 300px;
 }
 
 .carousel_image_container {
-	height: 500px;
-	opacity: 70%;
+    height: 500px;
+    opacity: 70%;
 }

@@ -1,17 +1,77 @@
 .slug_global_container {
-  max-width: var(--maxWidth1);
+  max-width: 1500px;
+  margin: auto;
   height: auto;
+  color: var(--darkColor1);
 }
 
 .slug_carousel_container {
   max-width: var(--maxWidth1);
   width: 1000px;
-  height: 1000px;
+  height: auto;
   margin: auto;
 }
 
 .slug_img_container {
   max-width: var(--maxWidth1);
-  height: 1000px;
   width: 1000px;
+  margin-bottom: 100px;
+}
+
+.slug_bottom_container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.left_part {
+  max-width: 800px;
+  font-family: var(--text-font);
+}
+
+.left_middle_part {
+  display: flex;
+  justify-content: space-around;
+}
+
+.left_top_part p {
+  font-size: var(--fontSize0);
+}
+
+.details_lists {
+  width: 50%;
+  margin: 0 10px;
+}
+.details_lists h2 {
+  margin: 0;
+  padding: 0;
+  font-family: var(--text-font);
+}
+.details_lists li,
+.details_lists ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.border_title {
+  border-bottom: 1px solid var(--greyColor2);
+  margin: 15px 0;
+}
+
+.left_bottom_part {
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottom_details {
+  width: 50%;
+}
+
+.bottom_details_text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom_details_second {
+  padding-left: 150px;
 }/*# sourceMappingURL=slug.module.css.map */

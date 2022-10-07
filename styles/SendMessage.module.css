@@ -1,6 +1,4 @@
 .global_container {
-  position: absolute;
-  right: 0;
   display: flex;
   flex-direction: column;
   max-width: 420px;
@@ -86,6 +84,9 @@
 
 .image_container {
   width: 150px;
+  border: 1px solid var(--greyColor1);
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .text_part p {
@@ -96,7 +97,7 @@
 }
 
 .phone_part {
-  font-size: var(--fontSize1);
+  font-size: var(--fontSize0);
 }
 .phone_part p {
   margin: 5px 0;
