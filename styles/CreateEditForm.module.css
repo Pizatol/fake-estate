@@ -1,5 +1,5 @@
 .global_container {
-  max-width: var(--maxWidth1);
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -72,7 +72,7 @@
 
 .form_select,
 .form_publishDate {
-  width: 300px;
+  width: 350px;
   margin: 10px 0 15px 10px;
   font-family: var(--text-font);
   font-size: var(--fontSize1);
@@ -82,7 +82,7 @@
 .form_select input,
 .form_publishDate select,
 .form_publishDate input {
-  width: 120px;
+  width: 150px;
   height: 30px;
   font-family: var(--text-font);
   font-size: var(--fontSize1);
@@ -146,6 +146,28 @@
   background-color: var(--darkColor2);
   transition: all 0.3s ease;
   margin-left: 15px;
+}
+
+.details_items_rooms {
+  display: flex;
+  flex-wrap: wrap;
+}
+.details_items_rooms input {
+  width: 120px;
+  height: 30px;
+  margin: 5px 15px;
+  border-radius: 3px;
+  max-width: 150px;
+  margin: 5px 0 5px 10px;
+  border: 1px solid var(--darkColor1);
+  border-radius: 4px;
+  font-family: var(--text-font);
+  font-size: var(--fontSize0);
+  color: var(--darkColor1);
+}
+.details_items_rooms input:focus {
+  border: 2px solid var(--blueColor1);
+  outline: none;
 }
 
 .form_submit_button:hover {

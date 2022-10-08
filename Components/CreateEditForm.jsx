@@ -39,23 +39,43 @@ export default function CreateEditForm() {
     const [reference, setReference] = useState();
     const [adress, setAdress] = useState("");
     const [goodType, setGoodType] = useState("");
-
     const [city, setCity] = useState("");
-
     const [price, setPrice] = useState();
     const [surface, setSurface] = useState();
-
     const [nbRooms, setNbRooms] = useState();
-
     const [floor, setFloor] = useState();
     const [elevator, setElevator] = useState("");
     const [heating, setHeating] = useState("");
     const [textDetailled, setTextDetailled] = useState("");
     const [textSummary, setTextSummary] = useState("");
     const [sellRental, setSellRental] = useState("");
-
     const [stateImage, setStateImage] = useState([]);
     const [dataImage, setDataImage] = useState([]);
+
+    const [entry, setEntry] = useState("");
+    const [livingRoom, setLivingRoom] = useState("");
+    const [bedRoom, setBedRoom] = useState("");
+    const [desk, setDesk] = useState("");
+    const [bathroom, setBathroom] = useState("");
+    const [toilet, setToilet] = useState("");
+    const [diningRoom, setDiningRoom] = useState("");
+    const [parking, setParking] = useState("");
+
+    const [itemParticulariry, setItemParticulariry] = useState("");
+    const [particularityList, setParticularityList] = useState([]);
+
+    console.log(sellRental);
+
+    const addParticularity = (e) => {
+        e.preventDefault();
+        setParticularityList((prev) => [...prev, itemParticulariry]);
+        setItemParticulariry("");
+    };
+
+    const resetParticularity = () => {
+        setParticularityList([]);
+        setItemParticulariry("");
+    };
 
     const [publishDate, setPublishDate] = useState(
         new Date().toISOString().split("T")[0]
@@ -81,6 +101,15 @@ export default function CreateEditForm() {
             sellRental,
             isPublished,
             dataImage,
+            entry,
+            livingRoom,
+            bedRoom,
+            desk,
+            bathroom,
+            toilet,
+            diningRoom,
+            parking,
+            particularityList,
             publishDate: new Date(publishDate),
         };
 
@@ -108,9 +137,19 @@ export default function CreateEditForm() {
         setTextDetailled("");
         setTextSummary("");
         setSellRental("");
+        setEntry("");
+        setLivingRoom("");
+        setBedRoom("");
+        setDesk("");
+        setBathroom("");
+        setToilet("");
+        setDiningRoom("");
+        setParking("");
         setPublishDate(new Date().toISOString().split("T")[0]);
         setStateImage([]);
         setDataImage([]);
+        setParticularityList([]);
+        setItemParticulariry("");
         window.scrollTo(0, 0);
     };
 
@@ -150,11 +189,6 @@ export default function CreateEditForm() {
         });
     };
 
-    // DELETE
-    // const deleteFromFirebase = (id, image) => {
-    //     console.log("deleteFromFirebase", id, image);
-    // };
-
     const deleteImage = (e) => {
         const imageSelectRef = ref(storage, `/images/${e.name}`);
 
@@ -168,30 +202,6 @@ export default function CreateEditForm() {
             .catch((error) => {
                 console.log(error.message);
             });
-
-        // const userDoc = doc(db, "test", id);
-
-        // let imagesNames = [];
-        // if (image) {
-        //     for (let img of image) {
-        //         imagesNames.push(img.name);
-        //     }
-
-        //     for (let i = 0; i < imagesNames.length; i++) {
-        //         const imgRef = ref(imageListRef, imagesNames[i]);
-        //         deleteObject(imgRef)
-        //             .then(() => {
-        //                 console.log("image deleted");
-        //             })
-        //             .catch((error) => {
-        //                 console.log(error.message);
-        //             });
-        //     }
-        // }
-
-        // updateDoc(userDoc, {
-        //     image: deleteField(),
-        // });
     };
 
     // *****************
@@ -250,12 +260,12 @@ export default function CreateEditForm() {
                     >
                         Type :
                         <select>
-                            <option
-                                value={goodType}
-                                selected
-                                
-                            ></option>
-                            <option selected value="appartement">Appartement</option>
+                        <option value="none" selected disabled hidden>
+                                Select
+                            </option>
+                            <option value="appartement">
+                                Appartement
+                            </option>
                             <option value="maison">Maison</option>
                             <option value="chateau">Château</option>
                         </select>
@@ -310,12 +320,104 @@ export default function CreateEditForm() {
                             value={elevator}
                             onChange={(e) => setElevator(e.target.value)}
                         >
-                            <option value="" defaultValue={""}></option>
-                            <option value="true">Yes</option>
+                        <option value="none" selected disabled hidden>
+                                Select
+                            </option>
+                            <option value="true">
+                                Yes
+                            </option>
                             <option value="false">No</option>
                         </select>
                     </label>
+                    {/* +++++++++ */}
+                    <div className={css.details_items_rooms}>
+                        <input
+                            onChange={(e) => setEntry(e.target.value)}
+                            type="number"
+                            placeholder="Entrée"
+                            required
+                            value={entry}
+                        />
+                        <input
+                            onChange={(e) => setLivingRoom(e.target.value)}
+                            type="number"
+                            placeholder="salon"
+                            required
+                            value={livingRoom}
+                        />
+                        <input
+                            onChange={(e) => setBedRoom(e.target.value)}
+                            type="number"
+                            placeholder="chambre"
+                            required
+                            value={bedRoom}
+                        />
+                        <input
+                            onChange={(e) => setDesk(e.target.value)}
+                            type="number"
+                            placeholder="bureau"
+                            required
+                            value={desk}
+                        />
+                        <input
+                            onChange={(e) => setBathroom(e.target.value)}
+                            type="number"
+                            placeholder="salle de bain"
+                            required
+                            value={bathroom}
+                        />
+                        <input
+                            onChange={(e) => setToilet(e.target.value)}
+                            type="number"
+                            placeholder="toilettes"
+                            required
+                            value={toilet}
+                        />
+                        <input
+                            onChange={(e) => setDiningRoom(e.target.value)}
+                            type="number"
+                            placeholder="salle à manger"
+                            required
+                            value={diningRoom}
+                        />
+                        <input
+                            onChange={(e) => setParking(e.target.value)}
+                            type="number"
+                            placeholder="parking"
+                            required
+                            value={parking}
+                        />
+                        {/*  entrée salon chambre bureau salleDeBain toilettes salleAManger parking */}
+                    </div>
 
+                    {/* ++++++++++++ */}
+
+                    <div>
+                        <p>Particularités</p>
+
+                        <label>
+                            <input
+                                type="text"
+                                placeholder="Add item"
+                                onChange={(e) =>
+                                    setItemParticulariry(e.target.value)
+                                }
+                                value={itemParticulariry}
+                            />
+                            <button type="button" onClick={addParticularity}>
+                                Add
+                            </button>
+                            <button type="button" onClick={resetParticularity}>
+                                reset
+                            </button>
+                        </label>
+
+                        {particularityList.map((e, index) => (
+                            <li key={index}> {e} </li>
+                        ))}
+                    </div>
+
+                    {/* +++++++++++ */}
                     <label className={css.form_summaryText}>
                         Summary
                         <textarea
@@ -344,7 +446,10 @@ export default function CreateEditForm() {
                     >
                         Sell or Locate :
                         <select>
-                            <option selected value="achat">Sell</option>
+                            <option value="none" selected disabled hidden>
+                                Select
+                            </option>
+                            <option value="achat">Sell</option>
                             <option value="location">Location</option>
                         </select>
                     </label>
@@ -399,7 +504,7 @@ export default function CreateEditForm() {
                                         alt={img}
                                     />
                                     <button
-                                    type="button"
+                                        type="button"
                                         onClick={() => {
                                             deleteImage(img);
                                         }}

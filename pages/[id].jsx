@@ -237,6 +237,8 @@ export default function CustomPage() {
                                             className={`${css.bottom_details} ${css.bottom_details_second}`}
                                         >
                                             <EnergyChartLogo />
+
+                                            {/* EDIT BUTTON */}
                                             { user ? 'YES' : "NO"}
 
 
