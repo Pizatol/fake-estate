@@ -26,7 +26,7 @@ import {
     deleteField,
 } from "firebase/firestore";
 
-export default function CreateEditForm() {
+export default function CreateEditForm({ dataEdit }) {
     const { user, setUser } = useContext(LoginContext);
     FirebaseAuthService.subscribeToAuthChanges(setUser);
 
@@ -36,21 +36,29 @@ export default function CreateEditForm() {
 
     const [globalData, setGlobalData] = useState([]);
 
-    const [reference, setReference] = useState();
+    const edit = dataEdit;
+    const id = edit.id;
+
+    const [reference, setReference] = useState(0);
     const [adress, setAdress] = useState("");
     const [goodType, setGoodType] = useState("");
     const [city, setCity] = useState("");
     const [price, setPrice] = useState();
     const [surface, setSurface] = useState();
     const [nbRooms, setNbRooms] = useState();
-    const [floor, setFloor] = useState();
+    const [floor, setFloor] = useState(0);
     const [elevator, setElevator] = useState("");
     const [heating, setHeating] = useState("");
     const [textDetailled, setTextDetailled] = useState("");
-    const [textSummary, setTextSummary] = useState("");
+    // const [textSummary, setTextSummary] = useState("");
     const [sellRental, setSellRental] = useState("");
-    const [stateImage, setStateImage] = useState([]);
-    const [dataImage, setDataImage] = useState([]);
+
+    const [stateImage, setStateImage] = useState([]);    
+
+    const [uploadImage, setUploadImage] = useState([])
+
+    const [test, setTest] = useState([])
+    console.log(stateImage);
 
     const [entry, setEntry] = useState("");
     const [livingRoom, setLivingRoom] = useState("");
@@ -64,11 +72,19 @@ export default function CreateEditForm() {
     const [itemParticulariry, setItemParticulariry] = useState("");
     const [particularityList, setParticularityList] = useState([]);
 
-    console.log(sellRental);
-
-    const addParticularity = (e) => {
-        e.preventDefault();
-        setParticularityList((prev) => [...prev, itemParticulariry]);
+    const addParticularity = () => {
+        if (itemParticulariry === "") {
+            return;
+        }
+      
+        if (particularityList === []) {
+            
+            setParticularityList(itemParticulariry);
+            alert('ok')
+        } else {
+            setParticularityList((prev) => [...prev, itemParticulariry]);
+           
+        }
         setItemParticulariry("");
     };
 
@@ -97,10 +113,10 @@ export default function CreateEditForm() {
             elevator,
             heating,
             textDetailled,
-            textSummary,
+            // textSummary,
             sellRental,
             isPublished,
-            dataImage,
+            uploadImage,
             entry,
             livingRoom,
             bedRoom,
@@ -135,7 +151,7 @@ export default function CreateEditForm() {
         setElevator("");
         setHeating("");
         setTextDetailled("");
-        setTextSummary("");
+        // setTextSummary("");
         setSellRental("");
         setEntry("");
         setLivingRoom("");
@@ -147,7 +163,7 @@ export default function CreateEditForm() {
         setParking("");
         setPublishDate(new Date().toISOString().split("T")[0]);
         setStateImage([]);
-        setDataImage([]);
+        setUploadImage([]);
         setParticularityList([]);
         setItemParticulariry("");
         window.scrollTo(0, 0);
@@ -155,10 +171,7 @@ export default function CreateEditForm() {
 
     // IMAGE PREVIEW ***************
 
-    const onImageState = (e) => {
-        // setstateImage((prev) => [...prev, e]);
-        setStateImage(e);
-    };
+
 
     // FETCH DATA
     const fetchData = async () => {
@@ -166,14 +179,53 @@ export default function CreateEditForm() {
         setGlobalData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
+
     useEffect(() => {
-        fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        if (edit) {
+            setReference(edit.reference);
+            setAdress(edit.adress);
+            setPrice(edit.price);
+            setCity(edit.city);
+            setGoodType(edit.goodType);
+            setSurface(edit.surface);
+            setFloor(edit.floor);
+            setNbRooms(edit.nbRooms);
+            setElevator(edit.elevator);
+            setHeating(edit.heating);
+            setTextDetailled(edit.heating);
+            // setTextSummary(edit.textSummary);
+            setSellRental(edit.sellRental);
+            setEntry(edit.entry);
+            setLivingRoom(edit.livingRoom);
+            setBedRoom(edit.bedRoom);
+            setDesk(edit.desk);
+            setBathroom(edit.bathroom);
+            setToilet(edit.toilet);
+            setDiningRoom(edit.toilet);
+            setParking(edit.parking);
+            setPublishDate(new Date().toISOString().split("T")[0]);
+            setPublishDate(edit.publishDate);
+            setStateImage(edit.uploadImage);
+        }
+
     }, []);
 
+        // fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+
+      
+            // setParticularityList(edit.particularityList);
+            // setItemParticulariry(edit.particulariry);
+            
+            // setUploadImage();
+
+
+
+
+    
     // IMAGE UPLOAD
-    const onImageUpload = (e) => {
-        if (stateImage === null) return;
+    const onImageUpload = (e) => {        
 
         const name = stateImage.name + v4();
         const imageRef = ref(storage, `/images/${name}`);
@@ -182,8 +234,8 @@ export default function CreateEditForm() {
             getDownloadURL(snapshot.ref).then((url) => {
                 {
                     stateImage
-                        ? setDataImage((prev) => [...prev, { url, name }])
-                        : setDataImage({ url, name });
+                        ? setUploadImage((prev) => [...prev, { url, name }])
+                        : setUploadImage({ url, name })
                 }
             });
         });
@@ -194,14 +246,52 @@ export default function CreateEditForm() {
 
         deleteObject(imageSelectRef)
             .then(() => {
-                const filterArr = dataImage.filter(
+                const filterArr = uploadImage.filter(
                     (item) => item.name !== e.name
                 );
-                setDataImage(filterArr);
+                setUploadImage(filterArr);
             })
             .catch((error) => {
                 console.log(error.message);
             });
+    };
+
+    // EDIT
+    const handleEdit = async () => {
+        const newdoc = doc(db, "test", id);
+        const newProduct = {
+            reference,
+            adress,
+            city,
+            goodType,
+            price,
+            nbRooms,
+            surface,
+            floor,
+            elevator,
+            heating,
+            textDetailled,
+            // textSummary,
+            sellRental,
+            isPublished,
+            uploadImage,
+            entry,
+            livingRoom,
+            bedRoom,
+            desk,
+            bathroom,
+            toilet,
+            diningRoom,
+            parking,
+            particularityList,
+            publishDate: new Date(publishDate),
+        };
+        try {
+            await updateDoc(newdoc, newProduct);
+            alert(" product updated");
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     // *****************
@@ -260,12 +350,10 @@ export default function CreateEditForm() {
                     >
                         Type :
                         <select>
-                        <option value="none" selected disabled hidden>
+                            <option value="none" selected disabled hidden>
                                 Select
                             </option>
-                            <option value="appartement">
-                                Appartement
-                            </option>
+                            <option value="appartement">Appartement</option>
                             <option value="maison">Maison</option>
                             <option value="chateau">Château</option>
                         </select>
@@ -320,12 +408,10 @@ export default function CreateEditForm() {
                             value={elevator}
                             onChange={(e) => setElevator(e.target.value)}
                         >
-                        <option value="none" selected disabled hidden>
+                            <option value="none" selected disabled hidden>
                                 Select
                             </option>
-                            <option value="true">
-                                Yes
-                            </option>
+                            <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
                     </label>
@@ -411,14 +497,15 @@ export default function CreateEditForm() {
                                 reset
                             </button>
                         </label>
-
-                        {particularityList.map((e, index) => (
-                            <li key={index}> {e} </li>
-                        ))}
+                        {particularityList
+                            ? particularityList.map((e, index) => (
+                                  <li key={index}> {e} </li>
+                              ))
+                            : null}
                     </div>
 
                     {/* +++++++++++ */}
-                    <label className={css.form_summaryText}>
+                    {/* <label className={css.form_summaryText}>
                         Summary
                         <textarea
                             onChange={(e) => setTextSummary(e.target.value)}
@@ -426,7 +513,7 @@ export default function CreateEditForm() {
                             required
                             value={textSummary}
                         />
-                    </label>
+                    </label> */}
 
                     <label className={css.form_detailledText}>
                         Detail
@@ -464,19 +551,41 @@ export default function CreateEditForm() {
                     </label>
 
                     <div>
-                        <button
-                            className={css.form_submit_button}
-                            type="submit"
-                        >
-                            SUBMIT
-                        </button>
-                        <button
-                            type="button"
-                            onClick={resetForm}
-                            className={css.form_cancel_button}
-                        >
-                            RESET
-                        </button>
+                        {edit ? (
+                            <div>
+                                <button
+                                    onClick={() => handleEdit(id)}
+                                    className={css.form_submit_button}
+                                    type="submit"
+                                >
+                                    Edit{" "}
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={resetForm}
+                                    className={css.form_cancel_button}
+                                >
+                                    RESET
+                                </button>
+                            </div>
+                        ) : (
+                            <div>
+                                <button
+                                    className={css.form_submit_button}
+                                    type="submit"
+                                >
+                                    SUBMIT
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={resetForm}
+                                    className={css.form_cancel_button}
+                                >
+                                    RESET
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -485,7 +594,7 @@ export default function CreateEditForm() {
                         <input
                             required
                             type="file"
-                            onChange={(e) => onImageState(e.target.files[0])}
+                            onChange={(e) => setStateImage(e.target.files[0])}
                         />
 
                         <button type="button" onClick={onImageUpload}>
@@ -494,25 +603,27 @@ export default function CreateEditForm() {
                         </button>
 
                         <div className={css.image_container_preview}>
-                            {dataImage.map((img, index) => (
-                                <div className={css.image} key={index}>
-                                    <Image
-                                        src={img.url}
-                                        layout="responsive"
-                                        width={300}
-                                        height={200}
-                                        alt={img}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            deleteImage(img);
-                                        }}
-                                    >
-                                        delete images
-                                    </button>
-                                </div>
-                            ))}
+                            {uploadImage
+                                ? uploadImage.map((img, index) => (
+                                      <div className={css.image} key={index}>
+                                          <Image
+                                              src={img.url}
+                                              layout="responsive"
+                                              width={300}
+                                              height={200}
+                                              alt={img}
+                                          />
+                                          <button
+                                              type="button"
+                                              onClick={() => {
+                                                  deleteImage(img);
+                                              }}
+                                          >
+                                              delete
+                                          </button>
+                                      </div>
+                                  ))
+                                : null}
                         </div>
                     </div>
                 </div>

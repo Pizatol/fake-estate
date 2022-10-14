@@ -4,6 +4,7 @@ import css from "../styles/Home.module.scss";
 import react, { useState, useContext, useEffect } from "react";
 import firebase from "../Firebase/FirebaseConfig";
 
+
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
 import { db } from "../Firebase/FirebaseConfig";
 import { Auth } from "firebase/auth";
@@ -32,6 +33,7 @@ import NavBar from "../Components/NavBar";
 import LoginForm from "../Components/LoginForm";
 import Carousel from "../Components/Carousel";
 import CreateEditForm from "../Components/CreateEditForm";
+import Footer from "../Components/Footer";
 
 export default function Home() {
     const dataCollectionRef = collection(db, "test");
@@ -82,6 +84,7 @@ export default function Home() {
                         ""
                     )} */}
                 </section>
+            <Footer/>
             </div>
         </div>
     );

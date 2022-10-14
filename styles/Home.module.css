@@ -1,6 +1,8 @@
 .global_container {
   /* max-width: var(--maxWidth1); */
   margin: auto;
+  position: relative;
+  min-height: 150vh;
 }
 
 .test_section {

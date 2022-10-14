@@ -1,0 +1,60 @@
+.global_container {
+  bottom: 0;
+  width: 100%;
+  background-color: var(--greyColor1);
+}
+
+.upper_band {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--text-font);
+  font-size: var(--fontSize1);
+  background-color: var(--blueColor1);
+  color: var(--whiteColor1);
+}
+.upper_band h3,
+.upper_band p {
+  margin: 0 10px;
+}
+
+.phone {
+  display: flex;
+}
+.phone p {
+  margin: 0;
+}
+
+.lower_band {
+  display: flex;
+  justify-content: space-around;
+  max-width: 50%;
+  margin: auto;
+  padding: 0 100px;
+}
+
+.lower_band_part {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+  margin-top: 50px;
+}
+.lower_band_part h3 {
+  font-family: var(--text-font);
+  font-size: var(--fontSize2);
+  color: var(--darkColor1);
+}
+.lower_band_part a {
+  cursor: pointer;
+  font-family: var(--text-font);
+  font-size: var(--fontSize1);
+}
+.lower_band_part a:hover {
+  color: var(--blueColor1);
+}
+
+.lower_band_subpart {
+  display: flex;
+  flex-direction: column;
+}/*# sourceMappingURL=Footer.module.css.map */

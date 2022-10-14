@@ -8,7 +8,6 @@
     display: flex;
     // flex-direction: column;
     justify-content: center;
-
 }
 
 .form_name,
@@ -53,7 +52,7 @@
     input {
         max-width: 150px;
         height: 30px;
-    
+
         margin: 5px 0 5px 10px;
         border: 1px solid var(--darkColor1);
         border-radius: 4px;
@@ -67,11 +66,10 @@
     }
 }
 
-
 .form_select,
 .form_publishDate {
     width: 350px;
-   
+
     margin: 10px 0 15px 10px;
     font-family: var(--text-font);
     font-size: var(--fontSize1);
@@ -142,7 +140,6 @@
 
 // details items rooms
 .details_items_rooms {
-
     display: flex;
     flex-wrap: wrap;
 
@@ -152,8 +149,7 @@
         margin: 5px 15px;
         border-radius: 3px;
         max-width: 150px;
-        
-    
+
         margin: 5px 0 5px 10px;
         border: 1px solid var(--darkColor1);
         border-radius: 4px;
@@ -176,8 +172,6 @@
     color: var(--redColor1);
 }
 
-
-
 .global_container_preview {
     height: auto;
     width: auto;
@@ -190,13 +184,12 @@
     max-width: 1000px;
     width: auto;
     height: auto;
-  
 }
 
 .image {
     margin: 0 10px;
-    width: 300px;
-    height: 250px;
+    width: 200px;
+    height: 160px;
 
     overflow: hidden;
 }

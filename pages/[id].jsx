@@ -21,13 +21,13 @@ import css from "../styles/slug.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import EnergyChartLogo from "../Components/EnergyChartLogo";
+import Footer from "../Components/Footer";
 
 export default function CustomPage() {
     const dataCollectionRef = collection(db, "test");
     const router = useRouter();
     const idItem = router.query.id;
-    
-    
+
     const { user, setUser, products, setProducts } = useContext(LoginContext);
     FirebaseAuthService.subscribeToAuthChanges(setUser);
 
@@ -41,12 +41,13 @@ export default function CustomPage() {
 
         setProductImg(imgArray);
         setProduct(productfilter);
+    
     }, [products, idItem]);
 
     // const filteringData = () => {
     //     const filterArray = products.filter((item) => item.id === idItem);
     // };
-    console.log(product);
+
 
     return (
         <div className={css.slug_global_container}>
@@ -170,7 +171,13 @@ export default function CustomPage() {
                                             className={`${css.bottom_details} ${css.bottom_details_second}`}
                                         >
                                             <EnergyChartLogo />
-                                            { user ? 'YES' : "NO"}
+                                            {user ? (
+                                                <div>
+                                                   
+                                                </div>
+                                            ) : (
+                                                "NO"
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -239,9 +246,23 @@ export default function CustomPage() {
                                             <EnergyChartLogo />
 
                                             {/* EDIT BUTTON */}
-                                            { user ? 'YES' : "NO"}
+                                            {user ? (
+                                                
+                                                    <Link
+                                                        href={{
+                                                            pathname: "/NewProductPage",
+                                                            query : e
+                                                        }}
+                                                        
 
 
+                                                    >
+                                                        <a> Edit</a>
+                                                    </Link>
+                                               
+                                            ) : (
+                                                "NO"
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -253,6 +274,7 @@ export default function CustomPage() {
                     </div>
                 </div>
             ) : null}
+            <Footer />
         </div>
     );
 }
