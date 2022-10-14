@@ -37,37 +37,37 @@ export default function CreateEditForm({ dataEdit }) {
     const [globalData, setGlobalData] = useState([]);
 
     const edit = dataEdit;
+
     const id = edit.id;
 
-    const [reference, setReference] = useState(0);
+    const [reference, setReference] = useState(null);
     const [adress, setAdress] = useState("");
     const [goodType, setGoodType] = useState("");
     const [city, setCity] = useState("");
     const [price, setPrice] = useState();
     const [surface, setSurface] = useState();
     const [nbRooms, setNbRooms] = useState();
-    const [floor, setFloor] = useState(0);
+    const [floor, setFloor] = useState();
     const [elevator, setElevator] = useState("");
     const [heating, setHeating] = useState("");
     const [textDetailled, setTextDetailled] = useState("");
     // const [textSummary, setTextSummary] = useState("");
     const [sellRental, setSellRental] = useState("");
 
-    const [stateImage, setStateImage] = useState([]);    
+    const [stateImage, setStateImage] = useState([]);
+    const [uploadImage, setUploadImage] = useState([]);
 
-    const [uploadImage, setUploadImage] = useState([])
+    const [tempoListImg, setTempoListImg] = useState([]);
 
-    const [test, setTest] = useState([])
-    console.log(stateImage);
 
-    const [entry, setEntry] = useState("");
-    const [livingRoom, setLivingRoom] = useState("");
-    const [bedRoom, setBedRoom] = useState("");
-    const [desk, setDesk] = useState("");
-    const [bathroom, setBathroom] = useState("");
-    const [toilet, setToilet] = useState("");
-    const [diningRoom, setDiningRoom] = useState("");
-    const [parking, setParking] = useState("");
+    const [entry, setEntry] = useState(null);
+    const [livingRoom, setLivingRoom] = useState(null);
+    const [bedRoom, setBedRoom] = useState(null);
+    const [desk, setDesk] = useState(null);
+    const [bathroom, setBathroom] = useState(null);
+    const [toilet, setToilet] = useState(null);
+    const [diningRoom, setDiningRoom] = useState(null);
+    const [parking, setParking] = useState(null);
 
     const [itemParticulariry, setItemParticulariry] = useState("");
     const [particularityList, setParticularityList] = useState([]);
@@ -76,14 +76,12 @@ export default function CreateEditForm({ dataEdit }) {
         if (itemParticulariry === "") {
             return;
         }
-      
+
         if (particularityList === []) {
-            
             setParticularityList(itemParticulariry);
-            alert('ok')
+            alert("ok");
         } else {
             setParticularityList((prev) => [...prev, itemParticulariry]);
-           
         }
         setItemParticulariry("");
     };
@@ -97,10 +95,15 @@ export default function CreateEditForm({ dataEdit }) {
         new Date().toISOString().split("T")[0]
     );
 
+    console.log(reference);
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const isPublished = new Date(publishDate) <= new Date() ? true : false;
 
+  
+
+        // const isPublished = new Date(publishDate) <= new Date() ? true : false;
+
+      
         const newProduct = {
             reference,
             adress,
@@ -112,10 +115,9 @@ export default function CreateEditForm({ dataEdit }) {
             floor,
             elevator,
             heating,
-            textDetailled,
-            // textSummary,
+            textDetailled,  
             sellRental,
-            isPublished,
+           
             uploadImage,
             entry,
             livingRoom,
@@ -126,21 +128,25 @@ export default function CreateEditForm({ dataEdit }) {
             diningRoom,
             parking,
             particularityList,
-            publishDate: new Date(publishDate),
+            publishDate: new Date().toISOString().split("T")[0],
         };
+
+        console.log(newProduct);
 
         try {
             await addDoc(dataCollectionRef, newProduct);
             alert("Product added successfully");
-            resetForm();
+            resetInputs()
+    
+
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
             alert("Error adding product");
         }
     };
 
-    const resetForm = () => {
-        setReference("");
+ const resetInputs =  () => {
+    setReference(null);
         setAdress("");
         setPrice("");
         setCity("");
@@ -151,7 +157,7 @@ export default function CreateEditForm({ dataEdit }) {
         setElevator("");
         setHeating("");
         setTextDetailled("");
-        // setTextSummary("");
+
         setSellRental("");
         setEntry("");
         setLivingRoom("");
@@ -167,22 +173,38 @@ export default function CreateEditForm({ dataEdit }) {
         setParticularityList([]);
         setItemParticulariry("");
         window.scrollTo(0, 0);
+        setTempoListImg([]);
+ }   
+
+    
+
+    const resetForm = () => {
+        for (let i = 0; i < tempoListImg.length; i++) {
+            const imageSelectRef = ref(storage, `/images/${tempoListImg[i]}`);
+
+            deleteObject(imageSelectRef)
+                .then(() => {
+               
+                    console.log("deleted", tempoListImg[i]);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        }
+
+       resetInputs()
     };
 
     // IMAGE PREVIEW ***************
 
-
-
     // FETCH DATA
-    const fetchData = async () => {
-        const data = await getDocs(dataCollectionRef);
-        setGlobalData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
+    // const fetchData = async () => {
+    //     const data = await getDocs(dataCollectionRef);
+    //     setGlobalData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    // };
 
     useEffect(() => {
-
-        if (edit) {
+        if (edit !== {}) {
             setReference(edit.reference);
             setAdress(edit.adress);
             setPrice(edit.price);
@@ -208,26 +230,22 @@ export default function CreateEditForm({ dataEdit }) {
             setPublishDate(edit.publishDate);
             setStateImage(edit.uploadImage);
         }
-
     }, []);
 
-        // fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    // fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 
-      
-            // setParticularityList(edit.particularityList);
-            // setItemParticulariry(edit.particulariry);
-            
-            // setUploadImage();
+    // setParticularityList(edit.particularityList);
+    // setItemParticulariry(edit.particulariry);
 
+    // setUploadImage();
 
-
-
-    
     // IMAGE UPLOAD
-    const onImageUpload = (e) => {        
+    const onImageUpload = (e) => {
+        if (!stateImage) return;
 
         const name = stateImage.name + v4();
+        setTempoListImg((prev) => [...prev, name]);
         const imageRef = ref(storage, `/images/${name}`);
 
         uploadBytes(imageRef, stateImage).then((snapshot) => {
@@ -235,7 +253,7 @@ export default function CreateEditForm({ dataEdit }) {
                 {
                     stateImage
                         ? setUploadImage((prev) => [...prev, { url, name }])
-                        : setUploadImage({ url, name })
+                        : setUploadImage({ url, name });
                 }
             });
         });
@@ -350,9 +368,7 @@ export default function CreateEditForm({ dataEdit }) {
                     >
                         Type :
                         <select>
-                            <option value="none" selected disabled hidden>
-                                Select
-                            </option>
+                            <option value="">Select</option>
                             <option value="appartement">Appartement</option>
                             <option value="maison">Maison</option>
                             <option value="chateau">Château</option>
@@ -521,7 +537,7 @@ export default function CreateEditForm({ dataEdit }) {
                             onChange={(e) => setTextDetailled(e.target.value)}
                             placeholder="Detailled text"
                             required
-                            value={textDetailled}
+                            // value={textDetailled}
                         />
                     </label>
 
@@ -551,14 +567,14 @@ export default function CreateEditForm({ dataEdit }) {
                     </label>
 
                     <div>
-                        {edit ? (
+                        {edit === {} ? (
                             <div>
                                 <button
                                     onClick={() => handleEdit(id)}
                                     className={css.form_submit_button}
                                     type="submit"
                                 >
-                                    Edit{" "}
+                                    EDIT{" "}
                                 </button>
 
                                 <button
@@ -599,7 +615,7 @@ export default function CreateEditForm({ dataEdit }) {
 
                         <button type="button" onClick={onImageUpload}>
                             {" "}
-                            Upload{" "}
+                            ✔️{" "}
                         </button>
 
                         <div className={css.image_container_preview}>

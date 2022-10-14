@@ -83,7 +83,7 @@ export default function SellPage() {
                                               textSmmary={product.textSummary}
                                               sellRental={product.sellRental}
                                               publishDate={product.publishDate}
-                                              images={product.dataImage}
+                                              images={product.uploadImage}
                                           />
                                       </a>
                                   </Link>

@@ -179,11 +179,12 @@
 
 .image_container_preview {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     max-width: 1000px;
     width: auto;
     height: auto;
+
 }
 
 .image {
@@ -200,3 +201,5 @@
     height: 100px;
     width: 200px;
 }
+
+

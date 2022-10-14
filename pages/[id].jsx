@@ -33,21 +33,35 @@ export default function CustomPage() {
 
     const [product, setProduct] = useState("");
     const [productImg, setProductImg] = useState("");
+
+    const [entry, setEntry] = useState(0);
+    const [livingRoom, setLivingRoom] = useState(0);
+    const [bedRoom, setBedRoom] = useState(0);
+    const [desk, setDesk] = useState(0);
+    const [bathroom, setBathroom] = useState(0);
+    const [toilet, setToilet] = useState(0);
+    const [diningRoom, setDiningRoom] = useState(0);
+    const [parking, setParking] = useState(0);
+
     const e = product[0];
+    console.log(e);
 
     useEffect(() => {
         const productfilter = products.filter((item) => item.id === idItem);
-        const imgArray = productfilter[0].dataImage;
+        const imgArray = productfilter[0].uploadImage;
 
         setProductImg(imgArray);
         setProduct(productfilter);
-    
+
+        // setEntry(e.entry)
+        // setLivingRoom(e.livingRoom)
+        // setBedRoom(e.bedRoom)
+        // setDesk(e.desk)
+        // setBathroom(e.bathroom)
+        // setToilet(e.toilet)
+        // setDiningRoom(e.diningRoom)
+        // setParking(e.parking)
     }, [products, idItem]);
-
-    // const filteringData = () => {
-    //     const filterArray = products.filter((item) => item.id === idItem);
-    // };
-
 
     return (
         <div className={css.slug_global_container}>
@@ -103,15 +117,34 @@ export default function CustomPage() {
                                     <h2>Détails des pièces</h2>
                                     <div className={css.border_title}></div>
                                     <ul>
-                                        <li>1 Entrée</li>
-                                        <li>1 Salon</li>
-                                        <li>1 Salle à manger</li>
-                                        <li>1 Cuisine</li>
-                                        <li>3 Chambres</li>
-                                        <li>1 Salle de bains</li>
-                                        <li>1 Salle de douche</li>
-                                        <li>1 Toilettes</li>
-                                        <li>1 Cave</li>
+                                        {e.entry > 0 ? (
+                                            <li> Entrée : {e.entry} </li>
+                                        ) : null}
+                                        {e.bedRoom > 0 ? (
+                                            <li> Chambre : {e.bedRoom} </li>
+                                        ) : null}
+                                        {e.bathroom > 0 ? (
+                                            <li>
+                                                {" "}
+                                                Salle de bain : {
+                                                    e.bathroom
+                                                }{" "}
+                                            </li>
+                                        ) : null}
+                                        {e.toilet > 0 ? (
+                                            <li> Toilette : {e.toilet} </li>
+                                        ) : null}
+                                        {e.diningRoom > 0 ? (
+                                            <li>
+                                                {" "}
+                                                Salle à manger : {
+                                                    e.diningRoom
+                                                }{" "}
+                                            </li>
+                                        ) : null}
+                                        {e.parking > 0 ? (
+                                            <li> Parking : {e.parking} </li>
+                                        ) : null}
                                     </ul>
                                 </div>
 
@@ -171,13 +204,7 @@ export default function CustomPage() {
                                             className={`${css.bottom_details} ${css.bottom_details_second}`}
                                         >
                                             <EnergyChartLogo />
-                                            {user ? (
-                                                <div>
-                                                   
-                                                </div>
-                                            ) : (
-                                                "NO"
-                                            )}
+                                            {user ? <div></div> : "NO"}
                                         </div>
                                     </div>
                                 </div>
@@ -247,19 +274,15 @@ export default function CustomPage() {
 
                                             {/* EDIT BUTTON */}
                                             {user ? (
-                                                
-                                                    <Link
-                                                        href={{
-                                                            pathname: "/NewProductPage",
-                                                            query : e
-                                                        }}
-                                                        
-
-
-                                                    >
-                                                        <a> Edit</a>
-                                                    </Link>
-                                               
+                                                <Link
+                                                    href={{
+                                                        pathname:
+                                                            "/NewProductPage",
+                                                        query: e,
+                                                    }}
+                                                >
+                                                    <a> Edit</a>
+                                                </Link>
                                             ) : (
                                                 "NO"
                                             )}
