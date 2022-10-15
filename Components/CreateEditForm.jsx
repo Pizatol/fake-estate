@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
 import css from "../styles/CreateEditForm.module.scss";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import FirebaseAuthService from "../Firebase/FirebaseAuthService";
 import { db } from "../Firebase/FirebaseConfig";
@@ -27,9 +28,9 @@ import {
 } from "firebase/firestore";
 
 export default function CreateEditForm({ dataEdit }) {
-    const { user, setUser } = useContext(LoginContext);
+    const { user, setUser, products, setProducts } = useContext(LoginContext);
     FirebaseAuthService.subscribeToAuthChanges(setUser);
-
+    const router = useRouter();
     const dataCollectionRef = collection(db, "test");
 
     const imageListRef = ref(storage, "/images");
@@ -37,8 +38,10 @@ export default function CreateEditForm({ dataEdit }) {
     const [globalData, setGlobalData] = useState([]);
 
     const edit = dataEdit;
-
     const id = edit.id;
+    const idItem = router.query.id;
+
+    console.log(edit.price > 1 ? "yes" : "no");
 
     const [reference, setReference] = useState(null);
     const [adress, setAdress] = useState("");
@@ -51,14 +54,12 @@ export default function CreateEditForm({ dataEdit }) {
     const [elevator, setElevator] = useState("");
     const [heating, setHeating] = useState("");
     const [textDetailled, setTextDetailled] = useState("");
-    // const [textSummary, setTextSummary] = useState("");
     const [sellRental, setSellRental] = useState("");
 
     const [stateImage, setStateImage] = useState([]);
     const [uploadImage, setUploadImage] = useState([]);
 
     const [tempoListImg, setTempoListImg] = useState([]);
-
 
     const [entry, setEntry] = useState(null);
     const [livingRoom, setLivingRoom] = useState(null);
@@ -68,9 +69,58 @@ export default function CreateEditForm({ dataEdit }) {
     const [toilet, setToilet] = useState(null);
     const [diningRoom, setDiningRoom] = useState(null);
     const [parking, setParking] = useState(null);
+    const [cave, setCave] = useState(null);
 
     const [itemParticulariry, setItemParticulariry] = useState("");
     const [particularityList, setParticularityList] = useState([]);
+
+    const [provisionsCharges, setProvisionsCharges] = useState(null);
+    const [honorairesLocataire, setHonorairesLocataire] = useState(null);
+    const [depotGarantie, setDepotGarantie] = useState(null);
+    const [taxeFonciere, setTaxeFonciere] = useState(null);
+    const [chargesCopro, setChargesCopro] = useState(null);
+    const [lotCopro, setLotCopro] = useState(null);
+
+    useEffect(() => {
+        if (edit.price > 1) {
+            const productfilter = products.filter((item) => item.id === idItem);
+            const imgArray = productfilter[0].uploadImage;
+
+            setReference(edit.reference);
+            setAdress(edit.adress);
+            setPrice(edit.price);
+            setCity(edit.city);
+            setGoodType(edit.goodType);
+            setSurface(edit.surface);
+            setFloor(edit.floor);
+            setNbRooms(edit.nbRooms);
+            setElevator(edit.elevator);
+            setHeating(edit.heating);
+            setTextDetailled(edit.textDetailled);
+            setSellRental(edit.sellRental);
+            setEntry(edit.entry);
+            setLivingRoom(edit.livingRoom);
+            setBedRoom(edit.bedRoom);
+            setDesk(edit.desk);
+            setBathroom(edit.bathroom);
+            setToilet(edit.toilet);
+            setDiningRoom(edit.toilet);
+            setParking(edit.parking);
+            setCave(edit.cave);
+            setParticularityList(edit.particularityList);
+            setPublishDate(new Date().toISOString().split("T")[0]);
+            setPublishDate(edit.publishDate);
+
+            setUploadImage(imgArray);
+
+            setProvisionsCharges(edit.provisionsCharges);
+            setHonorairesLocataire(edit.honorairesLocataire);
+            setDepotGarantie(edit.depotGarantie);
+            setTaxeFonciere(edit.taxeFonciere);
+            setChargesCopro(edit.chargesCopro);
+            setLotCopro(edit.lotCopro);
+        }
+    }, [edit]);
 
     const addParticularity = () => {
         if (itemParticulariry === "") {
@@ -95,15 +145,11 @@ export default function CreateEditForm({ dataEdit }) {
         new Date().toISOString().split("T")[0]
     );
 
-    console.log(reference);
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-  
-
         // const isPublished = new Date(publishDate) <= new Date() ? true : false;
 
-      
         const newProduct = {
             reference,
             adress,
@@ -115,9 +161,8 @@ export default function CreateEditForm({ dataEdit }) {
             floor,
             elevator,
             heating,
-            textDetailled,  
+            textDetailled,
             sellRental,
-           
             uploadImage,
             entry,
             livingRoom,
@@ -127,56 +172,64 @@ export default function CreateEditForm({ dataEdit }) {
             toilet,
             diningRoom,
             parking,
+            cave,
             particularityList,
+            provisionsCharges,
+            honorairesLocataire,
+            depotGarantie,
+            taxeFonciere,
+            chargesCopro,
+            lotCopro,
             publishDate: new Date().toISOString().split("T")[0],
         };
-
-        console.log(newProduct);
 
         try {
             await addDoc(dataCollectionRef, newProduct);
             alert("Product added successfully");
-            resetInputs()
-    
-
+            resetInputs();
         } catch (error) {
             console.log(error);
             alert("Error adding product");
         }
     };
 
- const resetInputs =  () => {
-    setReference(null);
-        setAdress("");
-        setPrice("");
-        setCity("");
-        setGoodType("");
-        setSurface("");
-        setFloor("");
-        setNbRooms("");
-        setElevator("");
-        setHeating("");
-        setTextDetailled("");
-
-        setSellRental("");
-        setEntry("");
-        setLivingRoom("");
-        setBedRoom("");
-        setDesk("");
-        setBathroom("");
-        setToilet("");
-        setDiningRoom("");
-        setParking("");
+    const resetInputs = () => {
+        setReference(null);
+        setAdress(null);
+        setPrice(null);
+        setCity(null);
+        setGoodType(null);
+        setSurface(null);
+        setFloor(null);
+        setNbRooms(null);
+        setElevator(null);
+        setHeating(null);
+        setTextDetailled(null);
+        setSellRental(null);
+        setEntry(null);
+        setLivingRoom(null);
+        setBedRoom(null);
+        setDesk(null);
+        setBathroom(null);
+        setToilet(null);
+        setDiningRoom(null);
+        setParking(null);
+        setCave(null);
         setPublishDate(new Date().toISOString().split("T")[0]);
         setStateImage([]);
         setUploadImage([]);
         setParticularityList([]);
-        setItemParticulariry("");
-        window.scrollTo(0, 0);
+        setItemParticulariry(null);
         setTempoListImg([]);
- }   
+        setProvisionsCharges(null);
+        setHonorairesLocataire(null);
+        setDepotGarantie(null);
+        setTaxeFonciere(null);
+        setChargesCopro(null);
+        setLotCopro(null);
 
-    
+        window.scrollTo(0, 0);
+    };
 
     const resetForm = () => {
         for (let i = 0; i < tempoListImg.length; i++) {
@@ -184,7 +237,6 @@ export default function CreateEditForm({ dataEdit }) {
 
             deleteObject(imageSelectRef)
                 .then(() => {
-               
                     console.log("deleted", tempoListImg[i]);
                 })
                 .catch((error) => {
@@ -192,53 +244,10 @@ export default function CreateEditForm({ dataEdit }) {
                 });
         }
 
-       resetInputs()
+        resetInputs();
     };
 
-    // IMAGE PREVIEW ***************
-
-    // FETCH DATA
-    // const fetchData = async () => {
-    //     const data = await getDocs(dataCollectionRef);
-    //     setGlobalData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    // };
-
-    useEffect(() => {
-        if (edit !== {}) {
-            setReference(edit.reference);
-            setAdress(edit.adress);
-            setPrice(edit.price);
-            setCity(edit.city);
-            setGoodType(edit.goodType);
-            setSurface(edit.surface);
-            setFloor(edit.floor);
-            setNbRooms(edit.nbRooms);
-            setElevator(edit.elevator);
-            setHeating(edit.heating);
-            setTextDetailled(edit.heating);
-            // setTextSummary(edit.textSummary);
-            setSellRental(edit.sellRental);
-            setEntry(edit.entry);
-            setLivingRoom(edit.livingRoom);
-            setBedRoom(edit.bedRoom);
-            setDesk(edit.desk);
-            setBathroom(edit.bathroom);
-            setToilet(edit.toilet);
-            setDiningRoom(edit.toilet);
-            setParking(edit.parking);
-            setPublishDate(new Date().toISOString().split("T")[0]);
-            setPublishDate(edit.publishDate);
-            setStateImage(edit.uploadImage);
-        }
-    }, []);
-
-    // fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-
-    // setParticularityList(edit.particularityList);
-    // setItemParticulariry(edit.particulariry);
-
-    // setUploadImage();
+    // EDIT
 
     // IMAGE UPLOAD
     const onImageUpload = (e) => {
@@ -289,7 +298,6 @@ export default function CreateEditForm({ dataEdit }) {
             elevator,
             heating,
             textDetailled,
-            // textSummary,
             sellRental,
             isPublished,
             uploadImage,
@@ -312,6 +320,7 @@ export default function CreateEditForm({ dataEdit }) {
         }
     };
 
+    // *****************
     // *****************
     return (
         <div className={css.global_container}>
@@ -360,15 +369,16 @@ export default function CreateEditForm({ dataEdit }) {
                         />
                     </label>
 
-                    <label
-                        onChange={(e) => setGoodType(e.target.value)}
-                        className={css.form_select}
-                        value={goodType}
-                        required
-                    >
+                    <label className={css.form_select}>
                         Type :
-                        <select>
-                            <option value="">Select</option>
+                        <select
+                            onChange={(e) => setGoodType(e.target.value)}
+                            value={goodType}
+                            required
+                        >
+                            <option value="none" selected disabled hidden>
+                                Select
+                            </option>
                             <option value="appartement">Appartement</option>
                             <option value="maison">Maison</option>
                             <option value="chateau">Château</option>
@@ -489,7 +499,64 @@ export default function CreateEditForm({ dataEdit }) {
                             required
                             value={parking}
                         />
-                        {/*  entrée salon chambre bureau salleDeBain toilettes salleAManger parking */}
+                        <input
+                            onChange={(e) => setCave(e.target.value)}
+                            type="number"
+                            placeholder="cave"
+                            required
+                            value={cave}
+                        />
+                    </div>
+
+                    {/*  ************* */}
+                    <div className={css.details_items_rooms}>
+                        <input
+                            onChange={(e) =>
+                                setProvisionsCharges(e.target.value)
+                            }
+                            type="number"
+                            placeholder="provisions charges"
+                            required
+                            value={provisionsCharges}
+                        />
+
+                        <input
+                            onChange={(e) =>
+                                setHonorairesLocataire(e.target.value)
+                            }
+                            type="number"
+                            placeholder="honoraire locataire"
+                            required
+                            value={honorairesLocataire}
+                        />
+                        <input
+                            onChange={(e) => setDepotGarantie(e.target.value)}
+                            type="number"
+                            placeholder="depot garantie"
+                            required
+                            value={depotGarantie}
+                        />
+                        <input
+                            onChange={(e) => setTaxeFonciere(e.target.value)}
+                            type="number"
+                            placeholder="taxe foncière"
+                            required
+                            value={taxeFonciere}
+                        />
+                        <input
+                            onChange={(e) => setChargesCopro(e.target.value)}
+                            type="number"
+                            placeholder="charges copro"
+                            required
+                            value={chargesCopro}
+                        />
+                        <input
+                            onChange={(e) => setLotCopro(e.target.value)}
+                            type="number"
+                            placeholder="nb lots copro"
+                            required
+                            value={lotCopro}
+                        />
                     </div>
 
                     {/* ++++++++++++ */}
@@ -521,15 +588,6 @@ export default function CreateEditForm({ dataEdit }) {
                     </div>
 
                     {/* +++++++++++ */}
-                    {/* <label className={css.form_summaryText}>
-                        Summary
-                        <textarea
-                            onChange={(e) => setTextSummary(e.target.value)}
-                            placeholder="Summary text"
-                            required
-                            value={textSummary}
-                        />
-                    </label> */}
 
                     <label className={css.form_detailledText}>
                         Detail
@@ -537,18 +595,17 @@ export default function CreateEditForm({ dataEdit }) {
                             onChange={(e) => setTextDetailled(e.target.value)}
                             placeholder="Detailled text"
                             required
-                            // value={textDetailled}
+                            value={textDetailled}
                         />
                     </label>
 
-                    <label
-                        onChange={(e) => setSellRental(e.target.value)}
-                        className={css.form_select}
-                        value={sellRental}
-                        required
-                    >
+                    <label className={css.form_select}>
                         Sell or Locate :
-                        <select>
+                        <select
+                            onChange={(e) => setSellRental(e.target.value)}
+                            value={sellRental}
+                            required
+                        >
                             <option value="none" selected disabled hidden>
                                 Select
                             </option>
@@ -563,11 +620,12 @@ export default function CreateEditForm({ dataEdit }) {
                             required
                             type="date"
                             placeholder="publish date"
+                            value={publishDate}
                         />
                     </label>
 
                     <div>
-                        {edit === {} ? (
+                        {edit ? (
                             <div>
                                 <button
                                     onClick={() => handleEdit(id)}

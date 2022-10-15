@@ -44,7 +44,8 @@ export default function SellPage() {
         }
     };
 
-    console.log("RELOAD SELL PAGE");
+ 
+
     useEffect(() => {
         fetchData();
 

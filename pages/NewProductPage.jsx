@@ -4,13 +4,10 @@ import CreateEditForm from "../Components/CreateEditForm";
 import NavBar from "../Components/NavBar";
 import css from "../styles/NewProductPage.module.scss";
 
-export default function NewProductPage(  ) {
+export default function NewProductPage() {
+    const router = useRouter();
+    const data = router.query;
 
- 
-   const router = useRouter();
-   const data = router.query
-
-   console.log(data);
     return (
         <div className={css.global_container}>
             <NavBar />

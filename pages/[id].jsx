@@ -34,17 +34,6 @@ export default function CustomPage() {
     const [product, setProduct] = useState("");
     const [productImg, setProductImg] = useState("");
 
-    const [entry, setEntry] = useState(0);
-    const [livingRoom, setLivingRoom] = useState(0);
-    const [bedRoom, setBedRoom] = useState(0);
-    const [desk, setDesk] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
-    const [toilet, setToilet] = useState(0);
-    const [diningRoom, setDiningRoom] = useState(0);
-    const [parking, setParking] = useState(0);
-
-    const e = product[0];
-    console.log(e);
 
     useEffect(() => {
         const productfilter = products.filter((item) => item.id === idItem);
@@ -53,15 +42,10 @@ export default function CustomPage() {
         setProductImg(imgArray);
         setProduct(productfilter);
 
-        // setEntry(e.entry)
-        // setLivingRoom(e.livingRoom)
-        // setBedRoom(e.bedRoom)
-        // setDesk(e.desk)
-        // setBathroom(e.bathroom)
-        // setToilet(e.toilet)
-        // setDiningRoom(e.diningRoom)
-        // setParking(e.parking)
+        
     }, [products, idItem]);
+
+    const e = product[0];
 
     return (
         <div className={css.slug_global_container}>
@@ -152,10 +136,14 @@ export default function CustomPage() {
                                     <h2>Prestations Immobilières</h2>
                                     <div className={css.border_title}></div>
                                     <ul>
-                                        <li>Cheminée</li>
-                                        <li>Ascenseur</li>
-                                        <li>Digicode</li>
-                                        <li>Interphone</li>
+                                    {
+                                        e.particularityList.map((item, index) => (
+                                            <li key={index}> 
+                                                {item}
+                                            </li>
+                                        ))
+                                    }
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -204,7 +192,23 @@ export default function CustomPage() {
                                             className={`${css.bottom_details} ${css.bottom_details_second}`}
                                         >
                                             <EnergyChartLogo />
-                                            {user ? <div></div> : "NO"}
+
+
+                                              {/* EDIT BUTTON */}
+                                              {user ? (
+                                                <Link
+                                                    href={{
+                                                        pathname:
+                                                        "/NewProductPage",
+                                                        query: e,
+                                                    }}
+                                                >
+                                                    <a> Edit</a>
+                                                </Link>
+                                            ) : (
+                                                ""
+                                            )}
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -267,6 +271,7 @@ export default function CustomPage() {
                                             </div>
                                         </div>
 
+
                                         <div
                                             className={`${css.bottom_details} ${css.bottom_details_second}`}
                                         >
@@ -284,7 +289,7 @@ export default function CustomPage() {
                                                     <a> Edit</a>
                                                 </Link>
                                             ) : (
-                                                "NO"
+                                                ""
                                             )}
                                         </div>
                                     </div>
