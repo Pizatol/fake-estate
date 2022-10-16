@@ -625,7 +625,7 @@ export default function CreateEditForm({ dataEdit }) {
                     </label>
 
                     <div>
-                        {edit ? (
+                        {edit.price > 1 ? (
                             <div>
                                 <button
                                     onClick={() => handleEdit(id)}

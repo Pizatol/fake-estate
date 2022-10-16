@@ -72,6 +72,8 @@
 
 .bottom_details {
  width: 50%;
+ height: auto;
+
 }
 .bottom_details_text {
     display: flex;
@@ -81,5 +83,29 @@
     }
 }
 .bottom_details_second{
-    padding-left: 150px;
+    padding-left: 150px;  
+
+    
+}
+
+
+.edit_button { 
+    width: 100px;   
+    text-align: center;
+    font-family: var(--text-font);
+    font-size: var(--fontSize2);
+    color: var(--darkColor1);
+    border: 1px solidvar(--redColor1);
+    border-radius: 15px;
+    background-color: var(--redColor1);
+    padding: 15px;
+    margin-top: 50px;
+    transition: all .3s ease;
+
+   
+    
+}
+
+.edit_button:hover {
+    background-color: red;
 }

@@ -194,8 +194,14 @@ export default function CustomPage() {
                                             <EnergyChartLogo />
 
 
-                                              {/* EDIT BUTTON */}
-                                              {user ? (
+                                             
+                                           
+                                        </div>
+                                    </div>
+                                     {/* EDIT BUTTON */}
+                                     {user ? (
+                                        <div className={css.edit_button}>
+
                                                 <Link
                                                     href={{
                                                         pathname:
@@ -203,14 +209,12 @@ export default function CustomPage() {
                                                         query: e,
                                                     }}
                                                 >
-                                                    <a> Edit</a>
+                                                    <a > Edit</a>
                                                 </Link>
+                                        </div>
                                             ) : (
                                                 ""
                                             )}
-                                           
-                                        </div>
-                                    </div>
                                 </div>
                             ) : (
                                 <div>
@@ -278,21 +282,26 @@ export default function CustomPage() {
                                             <EnergyChartLogo />
 
                                             {/* EDIT BUTTON */}
-                                            {user ? (
+                                            
+                                        </div>
+                                    </div>
+                                    {user ? (
+                                        <div className={css.edit_button}>
+
                                                 <Link
                                                     href={{
                                                         pathname:
-                                                            "/NewProductPage",
+                                                        "/NewProductPage",
                                                         query: e,
                                                     }}
                                                 >
-                                                    <a> Edit</a>
+                                                    <a > Edit</a>
                                                 </Link>
+                                        </div>
                                             ) : (
                                                 ""
                                             )}
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             )}
                         </div>

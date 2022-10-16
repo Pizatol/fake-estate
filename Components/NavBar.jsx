@@ -47,7 +47,7 @@ export default function NavBar({ existingUser }) {
                 <Link href="/LocationPage">
                     <a className={css.button_navigation}>LOCATION</a>
                 </Link>
-                <Link href="/">
+                <Link href="/AboutPage">
                     <a className={css.button_navigation}> A PROPOS</a>
                 </Link>
 

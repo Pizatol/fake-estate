@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "firebase": "^9.9.4",
+    "leaflet": "^1.9.2",
     "next": "12.2.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.1.0",
     "react-responsive-carousel": "^3.2.23",
     "sass": "^1.54.9",
     "swiper": "^8.3.2",

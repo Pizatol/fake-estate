@@ -8,7 +8,7 @@ export default function Footer() {
 
 		<div className={css.upper_band} >
 			<h3> FAKE ESTATE</h3>
-			<p>18 rue du pont - 75008 Paris</p>
+			<p>18 rue coquillière - 75001 Paris</p>
 			<div className={css.phone}>
 
 		
