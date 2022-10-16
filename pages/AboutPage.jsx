@@ -19,15 +19,8 @@ export default function AboutPage() {
         setToggleCallButton(false);
     };
 
-    const defaultProps = {
-        center: {
-            lat: 10.99835602,
-            lng: 77.01502627,
-        },
-        zoom: 11,
-    };
+   
 
-    const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
     return (
         <div>

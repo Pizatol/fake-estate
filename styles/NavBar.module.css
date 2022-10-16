@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 30px auto;
+  padding: 30px auto;
   position: relative;
   z-index: 6;
 }
@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 500px;
+  max-width: 600px;
   width: 30%;
   height: 100px;
 }
@@ -21,11 +21,12 @@
 .button_navigation {
   position: relative;
   font-family: var(--text-font);
-  font-size: var(--fontSize1);
+  font-size: var(--fontSize2);
   font-weight: 500;
   color: var(--darkColor1);
   border-bottom: 0px;
   transition: all 0.3s ease;
+  margin: 0 5px;
 }
 
 .button_new_product {

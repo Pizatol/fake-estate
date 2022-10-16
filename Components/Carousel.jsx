@@ -15,9 +15,10 @@ import img3 from "../Assets/images_Carousel/3.jpg";
 import img4 from "../Assets/images_Carousel/4.jpg";
 import img5 from "../Assets/images_Carousel/5.jpg";
 import img6 from "../Assets/images_Carousel/6.jpg";
+import ParisCity from "../Assets/images_Carousel/ParisCity.jpg"
 
 export default function Carousel() {
-    const imgArr = [img1, img2, img3, img4, img5, img6];
+    const imgArr = [img1, img2, img3, img4, img5, img6, ParisCity];
 
     return (
         <div className={css.carousel_container_global}>
@@ -40,7 +41,9 @@ export default function Carousel() {
                     <SwiperSlide
                         className={css.carousel_image_container}
                         key={index}
+
                     >
+                    
                         <Image
                             src={img}
                             width={1932}
@@ -48,6 +51,7 @@ export default function Carousel() {
                             layout="responsive"
                             alt="picture carousel"
                         />
+                        
                     </SwiperSlide>
                 ))}
 

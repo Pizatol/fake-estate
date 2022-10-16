@@ -2,6 +2,7 @@
 
 	max-width: var(--maxWidth2);
 	margin: auto;
+	margin-bottom: 150px;
 	font-family: var(--text-font);
 	color: var(--darkColor1);
 }
@@ -16,8 +17,13 @@
 
 .css2 {
 	display: flex;
-	max-width: var(--maxWidth2);
+	justify-content: space-between;
+	max-width: var(--maxWidth1);
+	
 	margin: auto;
+
+
+	
 }
 
 .left_part, .right_part {
@@ -55,9 +61,7 @@
 
 // FORM
 
-.form_container {
 
-}
 .inputs_container {
 	display: flex;
 	justify-content: space-around;
@@ -83,6 +87,7 @@
 // RIGHT
 .right_part {
 	margin-top: 100px;
+	margin-left: 20px;
 }
 .map_container {
 	border: 1px solid var(--greyColor1);

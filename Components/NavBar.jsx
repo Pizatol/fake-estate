@@ -15,6 +15,7 @@ export default function NavBar({ existingUser }) {
     const { user, setUser } = useContext(LoginContext);
 
     const router = useRouter();
+    console.log(router.pathname);
 
     const toggleForm = () => {
         setFormOn(!formOn);
@@ -29,7 +30,10 @@ export default function NavBar({ existingUser }) {
     return (
         <div className={css.global_container}>
             <div>
-                <Link href="/">
+
+            {
+                router.pathname !== "/" ? (
+                    <Link href="/">
                     <a className={css.logo_navigation}>
                         <Image
                             src={logoFakeEstate}
@@ -39,6 +43,9 @@ export default function NavBar({ existingUser }) {
                         />
                     </a>
                 </Link>
+                ) : null
+            }
+                
             </div>
             <div className={css.buttons_navigation_container}>
                 <Link href="/SellPage">
