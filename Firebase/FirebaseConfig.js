@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const config = {
-    apiKey: process.env.NEXT_PUBLIC_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-    databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
-    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_APP_ID,
+    apiKey: "AIzaSyCWWqa75gqnCpbp9uMSsS-n1six0pHq3Lo",
+    authDomain:"fake-estate-ca321.firebaseapp.com",
+    databaseURL: "https://test-db-46eef-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "fake-estate-ca321",
+    storageBucket:"fake-estate-ca321.appspot.com",
+    messagingSenderId:"360683300468",
+    appId: "1:360683300468:web:1089e104bdcb0633f5d321",
 };
 
 const firebaseApp = initializeApp(config);
